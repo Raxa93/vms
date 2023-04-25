@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "714639959928",
+    "project_id": "fuvms-22ab6",
+    "storage_bucket": "fuvms-22ab6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714639959928:android:178f152f616f83fc018a8d",
+        "android_client_info": {
+          "package_name": "com.example.fu_vms"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714639959928-bktulb0i2idddbjjud4sn89vkqf807lg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.fu_vms",
+            "certificate_hash": "8e2f9aeede60ade15c48d1e75a845373ab85e8a2"
+          }
+        },
+        {
+          "client_id": "714639959928-j4790vutvuj7ogebagbqm1srioekcurb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzL8itQFYq8GFVL6fnSf-JKfjMm5RO4rc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714639959928-j4790vutvuj7ogebagbqm1srioekcurb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
