@@ -217,6 +217,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.4.0"
+  fluintl:
+    dependency: transitive
+    description:
+      name: fluintl
+      sha256: "6f55040c7b9ef0784fad076a24c6bc87c10ec11347fece945894432f5ddbbce3"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.0.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -264,6 +272,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  from_to_time_picker:
+    dependency: "direct main"
+    description:
+      name: from_to_time_picker
+      sha256: f238d6ba7979c852c314d52d43078addd6b5ea22f535972bc8026507d5df39f6
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.1.1"
   get_it:
     dependency: "direct main"
     description:

@@ -9,7 +9,7 @@ import '../../../../data/repositories/teacher_repo/teacher_repo_imp.dart';
 import '../../../../locator.dart';
 import '../../../utils/i_utills.dart';
 import '../../../utils/validators.dart';
-import '../teacher_dashboard.dart';
+import '../teacher_dashboard_views/teacher_dashboard.dart';
 
 class TeacherDataEntryViewModel extends ChangeNotifier {
   TextEditingController nameController = TextEditingController();
@@ -24,13 +24,14 @@ class TeacherDataEntryViewModel extends ChangeNotifier {
 
   Future saveTeacherData(context) async {
     EasyLoading.show();
+    String userEmail = _localStorageService.getEmail;
     String? token = await FirebaseMessaging.instance.getToken();
     var data = {
       'teacherName': nameController.text,
       'phoneNumber': phoneController.text,
       'fcmToken': token
     };
-    teacherFireStoreRepo.saveTeacherData(data).then((value) {
+    teacherFireStoreRepo.saveTeacherData(data,userEmail).then((value) {
 
 
         _localStorageService.setIsTeacherDataSaved = true;

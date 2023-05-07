@@ -6,6 +6,7 @@ import 'package:fu_vms/presentation/pages/login/login_vm.dart';
 import 'package:fu_vms/presentation/pages/register/register_vm.dart';
 import 'package:fu_vms/presentation/pages/splash/splash_view.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/data_entry_view/teacher_data_entry_vm.dart';
+import 'package:fu_vms/presentation/pages/teacher_views/teacher_dashboard_views/teacher_dashboard_vm.dart';
 import 'package:fu_vms/router.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => RegisterViewModel()),
         ChangeNotifierProvider(create: (_) => BreweryVm()),
         ChangeNotifierProvider(create: (_) => TeacherDataEntryViewModel()),
+        ChangeNotifierProvider(create: (_) => TeacherDashBoardVm()),
 
       ],
       child: MaterialApp(

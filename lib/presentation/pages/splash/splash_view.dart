@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:fu_vms/presentation/pages/students_view/student_home_view/student_home_view.dart';
+import 'package:fu_vms/presentation/pages/teacher_views/teacher_dashboard_views/teacher_dashboard.dart';
 
 import '../../../data/datasources/local/preferences_service.dart';
 import '../../../locator.dart';
@@ -37,8 +38,14 @@ class _SplashViewState extends State<SplashView> {
   }
 
   void readValueAndNavigate() {
-    if (_localStorageService.getIsLoggedIn == true && _localStorageService.getIsTeacher) {
-      Navigator.pushReplacementNamed(context, TeacherDataEntryView.routeName);
+    if (_localStorageService.getIsLoggedIn == true && _localStorageService.getIsTeacher){
+      if(_localStorageService.getIsTeacherDataSaved == true){
+        Navigator.pushReplacementNamed(context, TeacherDashBoardScreen.routeName);
+      }
+      else{
+        Navigator.pushReplacementNamed(context, TeacherDataEntryView.routeName);
+      }
+
     }
     else if(_localStorageService.getIsLoggedIn == true && _localStorageService.getIsTeacher == false){
       Navigator.pushReplacementNamed(context, StudentHomeView.routeName);

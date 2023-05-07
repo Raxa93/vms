@@ -6,7 +6,7 @@ import 'package:fu_vms/presentation/constants/app_styles.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/data_entry_view/teacher_data_entry_vm.dart';
 import 'package:provider/provider.dart';
 
-import '../teacher_dashboard.dart';
+import '../teacher_dashboard_views/teacher_dashboard.dart';
 
 class TeacherDataEntryView extends StatefulWidget {
   static const routeName = 'teacher_home_view';

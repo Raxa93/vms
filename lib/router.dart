@@ -10,9 +10,10 @@ import 'package:fu_vms/presentation/pages/register/verification_view.dart';
 import 'package:fu_vms/presentation/pages/splash/splash_view.dart';
 import 'package:fu_vms/presentation/pages/students_view/student_home_view/student_home_view.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/data_entry_view/teacher_data_entry_view.dart';
-import 'package:fu_vms/presentation/pages/teacher_views/teacher_dashboard.dart';
+import 'package:fu_vms/presentation/pages/teacher_views/teacher_dashboard_views/teacher_dashboard.dart';
 
 import 'data/models/brewry_model.dart';
+import 'presentation/pages/teacher_views/appointment_creation_view/new_appointment_creation_view.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings){
   switch(settings.name)
@@ -31,6 +32,8 @@ Route<dynamic> generateRoute(RouteSettings settings){
       return MaterialPageRoute(builder: (context) =>  const TeacherDataEntryView());
       case TeacherDashBoardScreen.routeName:
       return MaterialPageRoute(builder: (context) =>  const TeacherDashBoardScreen());
+    case NewAppointmentCreationView.routeName:
+      return MaterialPageRoute(builder: (context) =>  const NewAppointmentCreationView());
       case StudentHomeView.routeName:
       return MaterialPageRoute(builder: (context) =>  const StudentHomeView());
 

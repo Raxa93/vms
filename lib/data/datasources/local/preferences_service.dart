@@ -13,7 +13,7 @@ class LocalStorageService{
 
 
   bool get getIsLoggedIn => _getFromDisk(isLoggedInKey) ?? false;
-  String get email => _getFromDisk(emailKey) ?? '';
+  String get getEmail => _getFromDisk(emailKey) ?? '';
   bool get getIsTeacher => _getFromDisk(isTeacher) ?? false;
   bool get getIsTeacherDataSaved => _getFromDisk(isTeacherDataSaved) ?? false;
 
