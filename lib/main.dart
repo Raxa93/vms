@@ -40,7 +40,7 @@ class MyApp extends StatelessWidget {
         // initialRoute: BreweryMainView.routeName,
         theme: Theme.of(context).copyWith(
           colorScheme: Theme.of(context).colorScheme.copyWith(
-            primary: Colors.black,
+            primary: Colors.green,
             secondary: Colors.grey,
           ),
 

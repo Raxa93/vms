@@ -1,7 +1,4 @@
 
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:from_to_time_picker/from_to_time_picker.dart';
 import 'package:fu_vms/data/models/meeting_data_model.dart';
@@ -11,37 +8,37 @@ import '../../../../data/repositories/teacher_repo/teacher_repo_imp.dart';
 
 class TeacherDashBoardVm extends ChangeNotifier{
 
-  DateTime _startDateTime = DateTime.now();
-  DateTime _endDateTime = DateTime.now();
+  // DateTime _startDateTime = DateTime.now();
+  // DateTime _endDateTime = DateTime.now();
   final teacherFireStoreRepo = GetIt.instance.get<TeacherRepoImp>();
 
    selectDateTimeRange(context) async {
-     var date = showDatePicker(
+      await showDatePicker(
          context: context,
          initialDate: DateTime.now(),
          firstDate: DateTime.now(),
-         lastDate: DateTime.now()).then((pickedDate) {
+         lastDate:  DateTime(2025, 12, 31)).then((pickedDate) {
            if(pickedDate != null){
-             print('Buddy this is date i picked ${pickedDate}');
+             // print('Buddy this is date i picked ${pickedDate}');
              return showDialog(
                context: context,
                builder: (_) => Expanded(
                  child: FromToTimePicker(
                    onTab: (from, to) {
-                     print('from $from to $to');
+                     // print('from $from to $to');
                    },
-                   dialogBackgroundColor: Color(0xFF121212),
+                   dialogBackgroundColor: const Color(0xFF121212),
                    fromHeadlineColor: Colors.white,
                    toHeadlineColor: Colors.white,
                    upIconColor: Colors.white,
                    downIconColor: Colors.white,
-                   timeBoxColor: Color(0xFF1E1E1E),
+                   timeBoxColor: const Color(0xFF1E1E1E),
                    timeHintColor: Colors.grey,
                    timeTextColor: Colors.white,
-                   dividerColor: Color(0xFF121212),
+                   dividerColor: const Color(0xFF121212),
                    doneTextColor: Colors.white,
                    dismissTextColor: Colors.white,
-                   defaultDayNightColor: Color(0xFF1E1E1E),
+                   defaultDayNightColor: const Color(0xFF1E1E1E),
                    defaultDayNightTextColor: Colors.white,
                    colonColor: Colors.white,
                    showHeaderBullet: true,

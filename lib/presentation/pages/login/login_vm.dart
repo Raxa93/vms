@@ -41,13 +41,19 @@ class LoginViewModel extends BaseVm {
     EasyLoading.show();
     debugPrint(
         'This credentials ${emailController.text} and ${passwordController.text}');
-    var value = await repo.signInWithEmailAndPassword(
-        emailController.text, passwordController.text, context);
-    if(value !=null){
-      var userRole = await repo.checkUserRole(emailController.text);
-      _isTeacher = userRole.isTeacher;
+    String? value;
+    try{
+       value = await repo.signInWithEmailAndPassword(
+          emailController.text, passwordController.text, context);
+      if(value !=null){
+        var userRole = await repo.checkUserRole(emailController.text);
+        _isTeacher = userRole.isTeacher;
+      }
+      EasyLoading.dismiss();
+    }catch(e){
+      EasyLoading.dismiss();
     }
-    EasyLoading.dismiss();
+
     return value;
   }
 

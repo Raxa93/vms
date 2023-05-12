@@ -1,7 +1,6 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:fu_vms/data/datasources/remote/teacher_db_service.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../../data/datasources/local/preferences_service.dart';
