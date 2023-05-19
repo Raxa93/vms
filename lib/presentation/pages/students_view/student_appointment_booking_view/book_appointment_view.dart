@@ -1,7 +1,6 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 
-import '../../teacher_views/appointment_creation_view/new_appointment_creation_view.dart';
 import '../student_home_view/student_home_view.dart';
 
 class TeacherDetailScreen extends StatelessWidget {
@@ -60,7 +59,7 @@ class TeacherDetailScreen extends StatelessWidget {
                         ),
                       ),
                       const SizedBox(height: 8.0),
-                      Container(
+                      SizedBox(
                         height: 400,
                         child: ListView.builder(
                           itemCount: teacher.availableTimeSlots.length,

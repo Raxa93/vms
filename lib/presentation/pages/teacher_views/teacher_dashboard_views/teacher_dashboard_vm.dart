@@ -4,13 +4,26 @@ import 'package:from_to_time_picker/from_to_time_picker.dart';
 import 'package:fu_vms/data/models/meeting_data_model.dart';
 import 'package:get_it/get_it.dart';
 
+import '../../../../data/datasources/local/preferences_service.dart';
 import '../../../../data/repositories/teacher_repo/teacher_repo_imp.dart';
+import '../../../../locator.dart';
 
 class TeacherDashBoardVm extends ChangeNotifier{
 
   // DateTime _startDateTime = DateTime.now();
-  // DateTime _endDateTime = DateTime.now();
+  // DateTime _endDateTime = DateTime.now();.
+  String teacherName = '';
+  String teacherEmail = '';
+  String teacherImage = '';
   final teacherFireStoreRepo = GetIt.instance.get<TeacherRepoImp>();
+  final LocalStorageService _localStorageService =
+  locator<LocalStorageService>();
+
+  getValueFromDisk(){
+   teacherName = _localStorageService.getTeacherName;
+   teacherEmail = _localStorageService.getEmail;
+   teacherImage = _localStorageService.getTeacherImage;
+  }
 
    selectDateTimeRange(context) async {
       await showDatePicker(

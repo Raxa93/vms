@@ -1,8 +1,12 @@
 
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:fu_vms/data/models/user_role_model.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class TeacherDbServices{
   static late TeacherDbServices _instance;
@@ -21,7 +25,6 @@ class TeacherDbServices{
 
     User? user = FirebaseAuth.instance.currentUser;
     if(user !=null){
-
       try {
         DocumentSnapshot snapshot = await usersCollection.doc(email).get();
         if(snapshot.exists){
@@ -42,11 +45,21 @@ class TeacherDbServices{
     return UserRoleModel.fromSnapShot(await usersCollection.doc(email).get());
   }
 
-  Future saveTeacherInformation(data,String userEmail) async {
+  Future saveTeacherInformation(String phoneNumber,String teacherName,File teacherImage,String userEmail) async {
     try{
-      // User? user = FirebaseAuth.instance.currentUser;
+      String? token = await FirebaseMessaging.instance.getToken();
+      final firebase_storage.Reference storageRef = firebase_storage.FirebaseStorage.instance.ref().child('images').child(userEmail); // Replace 'email' with the teacher's email or a unique identifier
+      final firebase_storage.UploadTask uploadTask = storageRef.putFile(teacherImage);
+      final firebase_storage.TaskSnapshot taskSnapshot = await uploadTask.whenComplete(() => null);
 
-      await teacherCollection.doc(userEmail).set(data);}
+      final imageUrl = await taskSnapshot.ref.getDownloadURL();
+      var data = {
+        'teacherName': teacherName,
+        'phoneNumber': phoneNumber,
+        'fcmToken': token,
+        'imageUrl': imageUrl,
+      };
+      await teacherCollection.doc(userEmail).update(data);}
 
     catch(e){
       debugPrint('Exception while saving teacher data $e');

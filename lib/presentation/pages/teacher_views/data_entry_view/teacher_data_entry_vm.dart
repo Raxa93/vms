@@ -1,3 +1,7 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -9,38 +13,34 @@ import '../../../../locator.dart';
 import '../../../utils/i_utills.dart';
 import '../../../utils/validators.dart';
 import '../teacher_dashboard_views/teacher_dashboard.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TeacherDataEntryViewModel extends ChangeNotifier {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
+   File? imageFile;
 
-  final LocalStorageService _localStorageService =
-      locator<LocalStorageService>();
+  void setImageFile(File file) {
+    imageFile = file;
+    notifyListeners();
+  }
+
+  final LocalStorageService _localStorageService = locator<LocalStorageService>();
   final teacherFireStoreRepo = GetIt.instance.get<TeacherRepoImp>();
-
-  String? Function(String? password) get passwordValidator =>
-      Validator.nameValidator;
+  String? Function(String? password) get passwordValidator => Validator.nameValidator;
 
   Future saveTeacherData(context) async {
     EasyLoading.show();
     String userEmail = _localStorageService.getEmail;
-    String? token = await FirebaseMessaging.instance.getToken();
-    var data = {
-      'teacherName': nameController.text,
-      'phoneNumber': phoneController.text,
-      'fcmToken': token
-    };
-    teacherFireStoreRepo.saveTeacherData(data,userEmail).then((value) {
-
-
+    final String base64File = base64Encode(await imageFile!.readAsBytes());
+     _localStorageService.setTeacherImage = base64File;
+     teacherFireStoreRepo.saveTeacherData(phoneController.text,nameController.text,imageFile!,userEmail).then((value) {
         _localStorageService.setIsTeacherDataSaved = true;
-        iUtills().showMessage(
-            context: context, title: 'Success', text: 'Data Saved');
+        _localStorageService.setTeacherName = nameController.text;
+        iUtills().showMessage(context: context, title: 'Success', text: 'Data Saved');
         EasyLoading.dismiss();
-        Navigator.of(context).pushReplacementNamed(
-            TeacherDashBoardScreen.routeName);
-
-
+        Navigator.of(context).pushReplacementNamed(TeacherDashBoardScreen.routeName);
     });
   }
+
 }

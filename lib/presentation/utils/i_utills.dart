@@ -4,6 +4,9 @@
 
 import 'package:another_flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
+import 'package:rflutter_alert/rflutter_alert.dart';
+
+import 'alert_helper.dart';
 
 class iUtills {
 
@@ -21,5 +24,21 @@ class iUtills {
     )..show(context);
   }
 
-
+  static void showMessageDialogWarning(String text, BuildContext context) {
+    AlertHelper(
+      context: context,
+      type: AlertType.warning,
+      title: "",
+      desc: text,
+    ).show();
+  }
+  static void showMessageDialogSuccess(String text, BuildContext? context) {
+    AlertHelper(
+      context: context,
+      type: AlertType.success,
+      title: "",
+      id: "",
+      desc: text,
+    ).show();
+  }
 }

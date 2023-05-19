@@ -1,8 +1,11 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:fu_vms/presentation/components/custom_text_field.dart';
 import 'package:fu_vms/presentation/configurations/size_config.dart';
 import 'package:fu_vms/presentation/constants/app_styles.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/data_entry_view/teacher_data_entry_vm.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 
@@ -34,11 +37,29 @@ class _TeacherDataEntryViewState extends State<TeacherDataEntryView> {
               key: _formKey,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   SizedBox(height: SizeConfig.screenHeight! * 0.04),
                   const Text('Dear Teacher Please Enter Your Data',
                       style: AppStyle.headline3),
+                  SizedBox(height: SizeConfig.screenHeight! * 0.04),
+                  CircleAvatar(
+                    radius: 60,
+                    backgroundImage: vm.imageFile != null ? FileImage(vm.imageFile!) : null,
+                    child: Align(
+                      alignment: Alignment.bottomCenter,
+                      child: IconButton(
+                        icon: const Icon(Icons.camera_alt),
+                        onPressed: () async {
+                          final pickedFile = await ImagePicker().getImage(source: ImageSource.gallery);
+                          if (pickedFile != null) {
+                            vm.setImageFile(File(pickedFile.path));
+                          }
+                        },
+                      ),
+                    ),
+                  ),
+
                   SizedBox(height: SizeConfig.screenHeight! * 0.04),
                   CustomTextField(
                     label: 'Name',
