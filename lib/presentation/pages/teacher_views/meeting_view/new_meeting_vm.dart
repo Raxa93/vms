@@ -156,11 +156,14 @@ class NewMeetingVm extends ChangeNotifier{
     var newMeeting = Meeting(
       title: titleController.text,
       description: descriptionController.text,
-     startDateTime: fromDateController.text + fromTimeController.text,
-      endDateTime: toDateController.text + toTimeController.text,
+      startDateTime: fromDateController.text ,
+      endDateTime: toDateController.text ,
+      startTime: fromTimeController.text,
+      endTime: toTimeController.text,
       approved: true,
       venue: roomController.text,
-      inProgress: true
+      inProgress: true,
+      requestedFrom: teacherEmail
     );
     try {
 

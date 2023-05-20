@@ -1,5 +1,6 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fu_vms/presentation/pages/students_view/student_home_view/student_home_view.dart';
@@ -11,6 +12,7 @@ import '../../configurations/size_config.dart';
 import '../../constants/app_colors.dart';
 import '../../constants/app_styles.dart';
 import '../register/register_view.dart';
+import '../students_view/student_data_entry/student_data_entry_view.dart';
 import '../teacher_views/data_entry_view/teacher_data_entry_view.dart';
 import 'forget_password_view.dart';
 import 'login_vm.dart';
@@ -90,7 +92,7 @@ class LoginView extends StatelessWidget {
                                               }
                                               else{
                                                 _localStorageService.setIsTeacher = false;
-                                                Navigator.of(context).pushReplacementNamed(StudentHomeView.routeName);
+                                                Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const StudentDataEntryView()));
                                               }
                                             }
                                           })

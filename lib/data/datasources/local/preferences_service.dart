@@ -11,7 +11,10 @@ class LocalStorageService{
   static const String isTeacher = 'is_teacher_key';
   static const String isTeacherDataSaved = 'is_teacher_data_saved_key';
   static const String teacherNameKey = 'teacher_name_key';
+  static const String studentNameKey = 'student_name_key';
   static const String teacherImageKey = 'teacher_image_key';
+  static const String studentImageKey = 'student_image_key';
+  static const String isStudentDataSavedKey = 'is_student_data_saved';
 
 
   bool get getIsLoggedIn => _getFromDisk(isLoggedInKey) ?? false;
@@ -19,7 +22,10 @@ class LocalStorageService{
   bool get getIsTeacher => _getFromDisk(isTeacher) ?? false;
   bool get getIsTeacherDataSaved => _getFromDisk(isTeacherDataSaved) ?? false;
   String get getTeacherName => _getFromDisk(teacherNameKey) ?? '';
+  String get getStudentName => _getFromDisk(studentNameKey) ?? '';
   String get getTeacherImage => _getFromDisk(teacherImageKey) ?? '';
+  String get getStudentImage => _getFromDisk(studentImageKey) ?? '';
+  bool get getIsStudentDataSaved => _getFromDisk(isStudentDataSavedKey) ?? false;
 
   set setIsLoggedIn(bool val) {
     _saveToDisk(isLoggedInKey, val);
@@ -39,9 +45,18 @@ class LocalStorageService{
   set setTeacherName(String val) {
     _saveToDisk(teacherNameKey, val);
   }
-
+  set setStudentName(String val) {
+    _saveToDisk(studentNameKey, val);
+  }
   set setTeacherImage(var val) {
     _saveToDisk(teacherImageKey, val);
+  }
+  set setStudentImage(var val) {
+    _saveToDisk(studentImageKey, val);
+  }
+
+  set setIsStudentDataSaved(bool val) {
+    _saveToDisk(isStudentDataSavedKey, val);
   }
 
   static Future<LocalStorageService> getInstance() async {

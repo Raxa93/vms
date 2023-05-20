@@ -6,8 +6,11 @@ class Meeting {
   late String venue;
   late String startDateTime;
   late String endDateTime;
+  late String startTime;
+  late String endTime;
   late bool approved;
   late bool inProgress;
+  late String requestedFrom;
 
 
   Meeting({
@@ -16,8 +19,11 @@ class Meeting {
     required this.venue,
     required this.startDateTime,
     required this.endDateTime,
+    required this.startTime,
+    required this.endTime,
     required this.approved,
     required this.inProgress,
+    required this.requestedFrom,
 
   });
 
@@ -30,6 +36,9 @@ class Meeting {
       'endDateTime': endDateTime,
       'approved': approved,
       'inProgress': inProgress,
+      'requestedFrom': requestedFrom,
+      'startTime': startTime,
+      'endTime': endTime,
 
     };
   }
@@ -43,7 +52,9 @@ class Meeting {
       endDateTime: json['endDateTime'],
       approved: json['approved'],
       inProgress: json['inProgress'],
-
+      requestedFrom: json['requestedFrom'],
+      startTime: json['startTime'],
+      endTime: json['endTime'],
     );
   }
 }

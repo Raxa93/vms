@@ -1,4 +1,5 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fu_vms/presentation/pages/students_view/student_home_view/student_home_view.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/teacher_dashboard_views/teacher_dashboard.dart';
@@ -6,6 +7,7 @@ import 'package:fu_vms/presentation/pages/teacher_views/teacher_dashboard_views/
 import '../../../data/datasources/local/preferences_service.dart';
 import '../../../locator.dart';
 import '../login/login_view.dart';
+import '../students_view/student_data_entry/student_data_entry_view.dart';
 import '../teacher_views/data_entry_view/teacher_data_entry_view.dart';
 
 class SplashView extends StatefulWidget {
@@ -48,7 +50,13 @@ class _SplashViewState extends State<SplashView> {
 
     }
     else if(_localStorageService.getIsLoggedIn == true && _localStorageService.getIsTeacher == false){
-      Navigator.pushReplacementNamed(context, StudentHomeView.routeName);
+      if(_localStorageService.getIsStudentDataSaved == true){
+        Navigator.pushReplacementNamed(context, StudentHomeView.routeName);
+      }
+      else{
+        Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const StudentDataEntryView()));
+      }
+      // Navigator.pushReplacementNamed(context, StudentHomeView.routeName);
     }
       else if(_localStorageService.getIsLoggedIn == false){
       Navigator.pushReplacementNamed(context, LoginView.routeName);
