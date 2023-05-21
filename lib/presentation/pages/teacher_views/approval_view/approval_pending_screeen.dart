@@ -168,7 +168,7 @@ class _MeetingApprovalScreen extends State<MeetingApprovalScreen> {
 
     Map<String, dynamic> notification = {
       'title': 'Meeting Request Approved',
-      'body': 'Dear Student, Your meeting request with $teacherName from ${startTime} To ${endTime} is approve.kindly be on time',
+      'body': 'Dear Student, Your meeting request with $teacherName from $startTime To $endTime is approve.kindly be on time',
     };
 
     Map<String, dynamic> requestBody = {

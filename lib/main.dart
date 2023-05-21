@@ -11,6 +11,7 @@ import 'package:fu_vms/presentation/pages/students_view/student_home_view/studen
 import 'package:fu_vms/presentation/pages/teacher_views/data_entry_view/teacher_data_entry_vm.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/diary_view/diary_vm.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/meeting_view/new_meeting_vm.dart';
+import 'package:fu_vms/presentation/pages/teacher_views/student_list_view/student_list_vm.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/teacher_dashboard_views/teacher_dashboard_vm.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/time_table_view/time_table_vm.dart';
 import 'package:fu_vms/router.dart';
@@ -44,6 +45,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (_) => StudentDataEntryViewModel()),
         ChangeNotifierProvider(create: (_) => StudentHomeViewModel()),
         ChangeNotifierProvider(create: (_) => MeetingRequestVm()),
+        ChangeNotifierProvider(create: (_) => StudentListVm()),
 
       ],
       child: MaterialApp(

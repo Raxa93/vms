@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 
 import '../meeting_view/all_meeting_view.dart';
 import '../meeting_view/new_meeting_view.dart';
+import '../student_list_view/student_list_view.dart';
 import '../time_table_view/time_table_view.dart';
 
 
@@ -211,19 +212,24 @@ class _TeacherDashBoardScreenState extends State<TeacherDashBoardScreen> {
                     children: [
                       RoundedContainer(
                         onTap: () {
+                          Navigator.of(context).push(
+                              CupertinoPageRoute(
+                                  builder: (context) =>
+                                      const StudentListView(
 
+                                      )));
                         },
                         icon: Icons.people,
                         text: 'Student List',
                       ),
                       SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                      RoundedContainer(
-                        onTap: () {
-
-                        },
-                        icon: Icons.group,
-                        text: 'Groups',
-                      ),
+                      // RoundedContainer(
+                      //   onTap: () {
+                      //
+                      //   },
+                      //   icon: Icons.group,
+                      //   text: 'Groups',
+                      // ),
                     ],
                   ),
                 ],

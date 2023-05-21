@@ -22,14 +22,6 @@ class TimeTableModel {
   });
 
   factory TimeTableModel.fromJson(Map<String, dynamic> json) {
-    // print('I got data ${json['teacherEmail']}');
-    // print('I got data ${json['section']}');
-    // print('I got data ${json['semester']}');
-    // print('I got data ${json['room']}');
-    // print('I got data ${json['startDate']}');
-    // print('I got data ${json['endDate']}');
-    // print('I got data ${json['startTime']}');
-    // print('I got data ${json['endTime']}');
     return TimeTableModel(
       teacherEmail: json['teacherEmail'],
       section: json['section'],
