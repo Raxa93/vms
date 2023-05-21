@@ -45,6 +45,7 @@ dependencies:
   #UI Packages
   another_flushbar: ^1.10.28
   flutter_easyloading: ^3.0.3
+  flutter_local_notifications: ^14.1.0
 
   #Network call
   http: ^0.13.4

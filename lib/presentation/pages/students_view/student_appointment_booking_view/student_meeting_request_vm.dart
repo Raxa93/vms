@@ -22,7 +22,7 @@ class MeetingRequestVm extends ChangeNotifier{
   final LocalStorageService _localStorageService =
   locator<LocalStorageService>();
 
-  saveMeeting(String teacherEmail,context,startTime,endTime) async {
+  Future saveMeeting(String teacherEmail,context,startTime,endTime) async {
    String userEmail = _localStorageService.getEmail;
     EasyLoading.show();
     var newMeeting = Meeting(
