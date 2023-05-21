@@ -26,6 +26,7 @@ class _MeetingScreenState extends State<MeetingScreen> {
         .doc(widget.teacherEmail)
         .collection('meetings')
         .where('inProgress', isEqualTo: true)
+        .where('approved', isEqualTo: true)
         .snapshots();
   }
 

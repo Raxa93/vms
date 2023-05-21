@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fu_vms/presentation/utils/i_utills.dart';
-
+import 'package:http/http.dart' as http;
 class MeetingApprovalScreen extends StatefulWidget {
   final String teacherEmail;
 
@@ -24,6 +27,8 @@ class _MeetingApprovalScreen extends State<MeetingApprovalScreen> {
         .where('inProgress', isEqualTo: true)
         .where('approved', isEqualTo: false)
         .snapshots();
+
+
   }
 
   @override
@@ -89,7 +94,7 @@ class _MeetingApprovalScreen extends State<MeetingApprovalScreen> {
                         ),
                         const SizedBox(height: 8.0),
                         Text(
-                          'Start Time: ${meetingData['startDateTime']}',
+                          'Start Time: ${meetingData['startTime']}',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey[600],
@@ -97,7 +102,7 @@ class _MeetingApprovalScreen extends State<MeetingApprovalScreen> {
                         ),
                         const SizedBox(height: 8.0),
                         Text(
-                          'End Time: ${meetingData['endDateTime']}',
+                          'End Time: ${meetingData['endTime']}',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey[600],
@@ -108,7 +113,15 @@ class _MeetingApprovalScreen extends State<MeetingApprovalScreen> {
                     trailing: ElevatedButton(
 
                       child: const Text('Approved'),
-                      onPressed: (){
+                      onPressed: ()async{
+                        EasyLoading.show();
+                        print('requestedBy email : ${meetingData['requestedFrom']}');
+                        final docSnap = await FirebaseFirestore.instance
+                            .collection('students')
+                            .doc(meetingData['requestedFrom'])
+                            .get();
+                        final data = docSnap.data();
+                        final fcmToken = data?['fcmToken'] as String?;
                         var meetingDocRef = FirebaseFirestore.instance
                             .collection('teachers')
                             .doc(widget.teacherEmail)
@@ -116,8 +129,11 @@ class _MeetingApprovalScreen extends State<MeetingApprovalScreen> {
                             .doc(meetingDoc.id);
                         meetingDocRef.update({'approved': true})
                             .then((_) {
+                          EasyLoading.dismiss();
+                             sendNotifications(studentFcm: fcmToken.toString(), teacherName: widget.teacherEmail,startTime: meetingData['startTime'],endTime: meetingData['endTime']);
                          iUtills().showMessage(context: context, title: 'Success', text: 'Meeting approved');
                         }).catchError((error) {
+                          EasyLoading.dismiss();
                           iUtills().showMessage(context: context, title: 'OOpss', text: 'Something went wrong');
                           print('Failed to approve meeting: $error');
                         });
@@ -139,5 +155,43 @@ class _MeetingApprovalScreen extends State<MeetingApprovalScreen> {
       ),
     );
   }
+
+  void sendNotifications({required String studentFcm, required  String teacherName, required  String startTime, required String endTime}) async {
+    const String serverKey = 'AAAApmPcZ3g:APA91bHpDR5ojrP6bUA3v1Pnp4sfSWhNfxrUnjdlRALpRu-yb6vREOJhnh06m6MK1zrdEc8sQfC4NwcxSg5_i_i94aGV55LxrHRjE27RK_BEk4dpPB8RDFYAGCMiwlx1vqR3s1F-bbQa';
+
+    const String url = 'https://fcm.googleapis.com/fcm/send';
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'key=$serverKey',
+    };
+
+    Map<String, dynamic> notification = {
+      'title': 'Meeting Request Approved',
+      'body': 'Dear Student, Your meeting request with $teacherName from ${startTime} To ${endTime} is approve.kindly be on time',
+    };
+
+    Map<String, dynamic> requestBody = {
+      'notification': notification,
+      'to': studentFcm,
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: jsonEncode(requestBody),
+      );
+
+      if (response.statusCode == 200) {
+        print('Notification sent successfully');
+      } else {
+        print('Failed to send notification');
+      }
+    } catch (e) {
+      print('Error sending notification: $e');
+    }
+  }
+
 }
 
