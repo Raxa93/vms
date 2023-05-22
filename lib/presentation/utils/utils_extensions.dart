@@ -23,4 +23,13 @@ extension FormatAlphaDate on DateTime{
   String formatDateToAlphaNumeric(){
     return DateFormat('dd MMMM y').format(this).toString();
   }
+
+}
+
+
+extension DateTimeExtensions on DateTime {
+  String toWeekdayString() {
+    final weekdays = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    return weekdays[this.weekday - 1];
+  }
 }

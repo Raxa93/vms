@@ -37,6 +37,7 @@ class NewMeetingVm extends ChangeNotifier{
         .then((pickedDate) async {
       if (pickedDate != null) {
         fromDateController.text = pickedDate.formatDateToString();
+        print('From date controller is ${fromDateController.text}');
         if(toDateController.text.isNotEmpty){
           if(DateTime.parse(fromDateController.text).isAfter(DateTime.parse(toDateController.text))){
             iUtills().showMessage(context: context, title: 'Error', text: 'End Date Cannot be before Start Date');

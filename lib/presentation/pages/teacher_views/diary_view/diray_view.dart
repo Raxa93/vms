@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fu_vms/presentation/configurations/size_config.dart';
@@ -148,33 +149,45 @@ class _DiaryView extends State<DiaryView> {
                             itemBuilder: (context, index) {
                               // final TeacherNote note = notes[index];
 
-                              return Card(
-                                elevation: 4,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: ListTile(
-                                  contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
-                                  title: Text(
-                                    snapshot.data![index].title.toString(),
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.bold,
-                                      color: Colors.black87,
-                                    ),
+                              return InkWell(
+                                onLongPress: (){
+                                  FirebaseFirestore.instance
+                                      .collection('teachers')
+                                      .doc(widget.teacherEmail)
+                                      .update({
+                                    'notes' : FieldValue.arrayRemove(
+                                        [snapshot.data![index].toMap()]
+                                    )
+                                  });
+                                },
+                                child: Card(
+                                  elevation: 4,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0),
                                   ),
-                                  subtitle: Text(
-                                    snapshot.data![index].description.toString(),
-                                    style: const TextStyle(
-                                      fontSize: 16,
-                                      color: Colors.black54,
+                                  child: ListTile(
+                                    contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 16.0),
+                                    title: Text(
+                                      snapshot.data![index].title.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 18,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black87,
+                                      ),
                                     ),
-                                  ),
-                                  trailing: Text(
-                                    snapshot.data![index].timestamp != '' ? DateFormat('MMM d, yyyy').format(DateTime.parse(snapshot.data![index].timestamp)) : '',
-                                    style: const TextStyle(
-                                      fontSize: 12.0,
-                                      color: Colors.grey,
+                                    subtitle: Text(
+                                      snapshot.data![index].description.toString(),
+                                      style: const TextStyle(
+                                        fontSize: 16,
+                                        color: Colors.black54,
+                                      ),
+                                    ),
+                                    trailing: Text(
+                                      snapshot.data![index].timestamp != '' ? DateFormat('MMM d, yyyy').format(DateTime.parse(snapshot.data![index].timestamp)) : '',
+                                      style: const TextStyle(
+                                        fontSize: 12.0,
+                                        color: Colors.grey,
+                                      ),
                                     ),
                                   ),
                                 ),

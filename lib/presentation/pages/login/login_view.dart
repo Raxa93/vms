@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:fu_vms/presentation/pages/students_view/student_home_view/student_home_view.dart';
+import 'package:fu_vms/presentation/pages/teacher_views/teacher_dashboard_views/teacher_dashboard.dart';
 import 'package:provider/provider.dart';
 import '../../../data/datasources/local/preferences_service.dart';
 import '../../../locator.dart';
@@ -88,11 +89,18 @@ class LoginView extends StatelessWidget {
                                               if(vm.isTeacher){
 
                                                 _localStorageService.setIsTeacher = true;
-                                                Navigator.of(context).pushReplacementNamed(TeacherDataEntryView.routeName);
+                                               bool isTeacherDataSaved = _localStorageService.getIsTeacherDataSaved;
+                                               isTeacherDataSaved ?
+                                                Navigator.of(context).pushReplacementNamed(TeacherDashBoardScreen.routeName) :
+                                               Navigator.of(context).pushReplacementNamed(TeacherDataEntryView.routeName)
+                                                ;
                                               }
                                               else{
                                                 _localStorageService.setIsTeacher = false;
-                                                Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const StudentDataEntryView()));
+                                                bool isStudentDataSaved = _localStorageService.getIsStudentDataSaved;
+                                                isStudentDataSaved ?
+                                                Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const StudentHomeView()))
+                                                    :Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const StudentDataEntryView()));
                                               }
                                             }
                                           })
