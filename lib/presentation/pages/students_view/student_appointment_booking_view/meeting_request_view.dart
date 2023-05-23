@@ -71,16 +71,16 @@ class _RequestMeetingViewState extends State<RequestMeetingView> {
                           return null;
                         },
                       ),
-                      TextFormField(
-                        controller: vm.roomController,
-                        decoration: const InputDecoration(labelText: 'Venue'),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter the room';
-                          }
-                          return null;
-                        },
-                      ),
+                      // TextFormField(
+                      //   controller: vm.roomController,
+                      //   decoration: const InputDecoration(labelText: 'Venue'),
+                      //   validator: (value) {
+                      //     if (value == null || value.isEmpty) {
+                      //       return 'Please enter the room';
+                      //     }
+                      //     return null;
+                      //   },
+                      // ),
 
                       ElevatedButton(
                           onPressed: ()async {
@@ -146,7 +146,7 @@ class _RequestMeetingViewState extends State<RequestMeetingView> {
 
     Map<String, dynamic> notification = {
       'title': 'Meeting Request Received',
-      'body': 'Dear ${teacherName}, You have received meeting request from $studentName from ${startTime} To ${endTime}',
+      'body': 'Dear $teacherName, You have received meeting request from $studentName from $startTime To $endTime',
     };
 
     Map<String, dynamic> requestBody = {

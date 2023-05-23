@@ -19,12 +19,12 @@ import '../../../utils/validators.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 
 class StudentDataEntryViewModel extends ChangeNotifier {
-  TextEditingController nameController = TextEditingController(text: 'Student test');
-  TextEditingController phoneController = TextEditingController(text: '031390021');
-  TextEditingController semesterController = TextEditingController(text: '8th');
-  TextEditingController sectionController = TextEditingController(text: 'c');
-  TextEditingController shiftController = TextEditingController(text: 'Morning');
-  TextEditingController sessionController = TextEditingController(text: 'Spring');
+  TextEditingController nameController = TextEditingController();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController semesterController = TextEditingController();
+  TextEditingController sectionController = TextEditingController();
+  TextEditingController shiftController = TextEditingController();
+  TextEditingController sessionController = TextEditingController();
   File? imageFile;
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
   // final usersCollection = _db.collection('users');

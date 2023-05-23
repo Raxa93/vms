@@ -27,6 +27,7 @@ class _TimeTableEditViewState extends State<TimeTableEditView> {
     context.read<TimeTableVm>().fromTimeController.text = widget.timeTableModel.startTime.toString();
     context.read<TimeTableVm>().toDateController.text = widget.timeTableModel.endDate.toString();
     context.read<TimeTableVm>().toTimeController.text = widget.timeTableModel.endTime.toString();
+    context.read<TimeTableVm>().subjetController.text = widget.timeTableModel.subject.toString();
     super.initState();
   }
 
@@ -65,6 +66,16 @@ class _TimeTableEditViewState extends State<TimeTableEditView> {
                       TextFormField(
                         controller: vm.semesterController,
                         decoration: const InputDecoration(labelText: 'Semester'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the semester';
+                          }
+                          return null;
+                        },
+                      ),
+                      TextFormField(
+                        controller: vm.subjetController,
+                        decoration: const InputDecoration(labelText: 'Subject'),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter the semester';
@@ -184,6 +195,7 @@ class _TimeTableEditViewState extends State<TimeTableEditView> {
                                 vm.fromDateController.text = '';
                                 vm.toTimeController.text = '';
                                 vm.fromTimeController.text = '';
+                                vm.subjetController.text = '';
                                 // Navigator.of(context).pop();
                                 // Navigator.pop(context);
                               }

@@ -9,6 +9,7 @@ class TimeTableModel {
   final String endDate;
   final String startTime;
   final String endTime;
+  final String subject;
 
   TimeTableModel({
     required this.teacherEmail,
@@ -19,18 +20,20 @@ class TimeTableModel {
     required this.endDate,
     required this.startTime,
     required this.endTime,
+    required this.subject,
   });
 
   factory TimeTableModel.fromJson(Map<String, dynamic> json) {
     return TimeTableModel(
-      teacherEmail: json['teacherEmail'],
-      section: json['section'],
-      semester: json['semester'],
-      room: json['room'],
-      startDate: json['startDate'],
-      endDate: json['endDate'],
-      startTime: json['startTime'],
-      endTime: json['endTime'],
+      teacherEmail: json['teacherEmail'] ?? 'Not Added',
+      section: json['section'] ?? 'Not Added',
+      semester: json['semester'] ?? 'Not Added',
+      room: json['room'] ?? 'Not Added',
+      startDate: json['startDate'] ?? 'Not Added',
+      endDate: json['endDate'] ?? 'Not Added',
+      startTime: json['startTime'] ?? 'Not Added',
+      endTime: json['endTime'] ?? 'Not Added' ,
+      subject: json['subject'] ?? 'Not Added',
     );
   }
 
@@ -44,6 +47,7 @@ class TimeTableModel {
       'endDate': endDate,
       'startTime': startTime,
       'endTime': endTime,
+      'subject': subject,
     };
   }
 }

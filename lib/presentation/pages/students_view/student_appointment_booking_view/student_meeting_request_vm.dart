@@ -33,7 +33,7 @@ class MeetingRequestVm extends ChangeNotifier{
         startTime: startTime,
         endTime: endTime,
         approved: false,
-        venue: roomController.text,
+        venue: 'Not Added',
         inProgress: true,
       requestedFrom: userEmail
     );

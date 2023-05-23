@@ -4,6 +4,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:fu_vms/presentation/pages/students_view/student_data_entry/student_data_entry_vm.dart';
+import 'package:fu_vms/presentation/utils/i_utills.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
@@ -102,6 +103,10 @@ class _StudentDataEntryViewState extends State<StudentDataEntryView> {
                         Center(
                           child: ElevatedButton(
                               onPressed: () async {
+                                if(vm.imageFile == null){
+                                  iUtills().showMessage(context: context, title: 'Warning', text: 'Picture is required');
+                                  return;
+                                }
                                 if (_formKey.currentState!.validate()) {
 
                                   await vm.saveStudentData(context).then((value) {

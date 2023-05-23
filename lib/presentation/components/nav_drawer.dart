@@ -124,11 +124,11 @@ class _NavDrawerState extends State<NavDrawer> {
               showDialog<bool>(
                 context: context,
                 builder: (c) => AlertDialog(
-                  title: Text('Exit App'),
-                  content: Text('Do you really want to exit?'),
+                  title: const Text('Exit App'),
+                  content: const Text('Do you really want to exit?'),
                   actions: [
                     ElevatedButton(
-                        child: Text('Yes'),
+                        child: const Text('Yes'),
                         onPressed: () {
                           if (Platform.isAndroid) {
                             SystemChannels.platform
@@ -137,7 +137,7 @@ class _NavDrawerState extends State<NavDrawer> {
                           // SystemNavigator.pop();
                         }),
                     ElevatedButton(
-                        child: Text('No'),
+                        child: const Text('No'),
                         onPressed: () {
                           Navigator.pop(c, false);
                         }),

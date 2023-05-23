@@ -1,8 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
 
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:get_it/get_it.dart';
@@ -13,7 +11,6 @@ import '../../../../locator.dart';
 import '../../../utils/i_utills.dart';
 import '../../../utils/validators.dart';
 import '../teacher_dashboard_views/teacher_dashboard.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 class TeacherDataEntryViewModel extends ChangeNotifier {
   TextEditingController nameController = TextEditingController();

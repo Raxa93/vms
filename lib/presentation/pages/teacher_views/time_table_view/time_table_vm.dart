@@ -20,6 +20,7 @@ class TimeTableVm extends ChangeNotifier{
   final TextEditingController sectionController = TextEditingController();
   final TextEditingController semesterController = TextEditingController();
   final TextEditingController roomController = TextEditingController();
+  final TextEditingController subjetController = TextEditingController();
   TimeOfDay? pickedFromTime, pickedToTime;
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
   final teacherCollection = _db.collection('teachers');
@@ -158,7 +159,9 @@ notifyListeners();
         startDate: fromDateController.text,
         endDate: toDateController.text,
         startTime: fromTimeController.text,
-        endTime: toTimeController.text);
+        endTime: toTimeController.text,
+    subject: subjetController.text
+    );
     try {
       final DocumentReference teacherDocRef = teacherCollection.doc(teacherEmail); // Get the teacher document reference
       await  teacherDocRef.update({
@@ -193,6 +196,7 @@ notifyListeners();
         startDate: fromDateController.text,
         endDate: toDateController.text,
         startTime: fromTimeController.text,
+        subject: subjetController.text,
         endTime: toTimeController.text);
     notes[index] = updateTimeTable.toJson();
     try {

@@ -1,6 +1,4 @@
-import 'dart:developer';
 
-import 'package:flutter/cupertino.dart';
 import 'package:fu_vms/data/models/time_table_model.dart';
 
 class TeacherModel {

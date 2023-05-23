@@ -1,4 +1,4 @@
-
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -8,8 +8,10 @@ import 'package:flutter/services.dart';
 import 'package:fu_vms/presentation/pages/login/login_view.dart';
 
 class StudentDrawer extends StatefulWidget {
-
-  StudentDrawer({Key? key}) : super(key: key);
+String studentName;
+String studentImage;
+String studentEmail;
+  StudentDrawer({Key? key,required this.studentImage,required this.studentName,required this.studentEmail}) : super(key: key);
 
   @override
   State<StudentDrawer> createState() => _StudentDrawer();
@@ -18,11 +20,13 @@ class StudentDrawer extends StatefulWidget {
 class _StudentDrawer extends State<StudentDrawer> {
   @override
   Widget build(BuildContext context) {
+
+
     return Drawer(
       child: ListView(
         padding: EdgeInsets.zero,
         children: [
-          DrawerHeader(
+          UserAccountsDrawerHeader(
             decoration: BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
@@ -30,43 +34,41 @@ class _StudentDrawer extends State<StudentDrawer> {
                 colors: [Colors.green.shade700, Colors.green.shade400],
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.end,
-              children:  [
-                const Text(
-                  'Welcome',
-                  style: TextStyle(
-                    fontSize: 24.0,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 10.0),
-                // Text(
-                //   widget.teacherName.toUpperCase(),
-                //   style: const TextStyle(
-                //     fontSize: 18.0,
-                //     color: Colors.white,
-                //   ),
-                // ),
-              ],
+            accountName:  Text(
+             widget.studentName,
+              style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            accountEmail: Text(
+              widget.studentEmail,
+              style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            currentAccountPicture:  CircleAvatar(
+              radius: 80,
+              backgroundColor: Colors.white, // Set a fallback background color
+              backgroundImage: MemoryImage(base64.decode(widget.studentImage)),
             ),
           ),
           ListTile(
             leading: const Icon(Icons.outbound_outlined),
             title: const Text('Logout'),
-            onTap: ()async {
+            onTap: () async {
               // TODO: Handle Student List tap
               final FirebaseAuth _auth = FirebaseAuth.instance;
               await _auth.signOut();
 
               Navigator.of(context).pushReplacement(
-                  CupertinoPageRoute(
-                      builder: (context) =>
-                          LoginView(
-
-                          )));
+                CupertinoPageRoute(
+                  builder: (context) => LoginView(),
+                ),
+              );
             },
           ),
           ListTile(
@@ -76,23 +78,25 @@ class _StudentDrawer extends State<StudentDrawer> {
               showDialog<bool>(
                 context: context,
                 builder: (c) => AlertDialog(
-                  title: Text('Exit App'),
-                  content: Text('Do you really want to exit?'),
+                  title: const Text('Exit App'),
+                  content: const Text('Do you really want to exit?'),
                   actions: [
                     ElevatedButton(
-                        child: Text('Yes'),
-                        onPressed: () {
-                          if (Platform.isAndroid) {
-                            SystemChannels.platform
-                                .invokeMethod<void>('SystemNavigator.pop');
-                          }
-                          // SystemNavigator.pop();
-                        }),
+                      child: const Text('Yes'),
+                      onPressed: () {
+                        if (Platform.isAndroid) {
+                          SystemChannels.platform
+                              .invokeMethod<void>('SystemNavigator.pop');
+                        }
+                        // SystemNavigator.pop();
+                      },
+                    ),
                     ElevatedButton(
-                        child: Text('No'),
-                        onPressed: () {
-                          Navigator.pop(c, false);
-                        }),
+                      child: const Text('No'),
+                      onPressed: () {
+                        Navigator.pop(c, false);
+                      },
+                    ),
                   ],
                 ),
               );
@@ -101,6 +105,5 @@ class _StudentDrawer extends State<StudentDrawer> {
         ],
       ),
     );
-
   }
 }

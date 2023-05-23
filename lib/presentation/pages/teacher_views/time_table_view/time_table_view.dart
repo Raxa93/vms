@@ -82,6 +82,16 @@ class _TimeTableViewState extends State<TimeTableView> {
                           return null;
                         },
                       ),
+                      TextFormField(
+                        controller: vm.subjetController,
+                        decoration: const InputDecoration(labelText: 'Subject'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the Subject';
+                          }
+                          return null;
+                        },
+                      ),
                       const SizedBox(height: 16.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -274,6 +284,13 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                         ),
                                                       ),
                                                       Text(
+                                                        'Subject',
+                                                        style: TextStyle(
+                                                          color: Colors.grey,
+                                                          fontSize: 16.0,
+                                                        ),
+                                                      ),
+                                                      Text(
                                                         'Semester',
                                                         style: TextStyle(
                                                           color: Colors.grey,
@@ -289,6 +306,14 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                      children: [
                                                        Text(
                                                          snapshot.data![index].room,
+                                                         style: const TextStyle(
+                                                           color: Colors.black,
+                                                           fontSize: 16.0,
+                                                           fontWeight: FontWeight.bold,
+                                                         ),
+                                                       ),
+                                                       Text(
+                                                         snapshot.data![index].subject,
                                                          style: const TextStyle(
                                                            color: Colors.black,
                                                            fontSize: 16.0,
