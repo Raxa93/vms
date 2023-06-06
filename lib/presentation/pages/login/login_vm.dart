@@ -13,6 +13,7 @@ class LoginViewModel extends BaseVm {
   final TextEditingController _passwordController = TextEditingController();
   bool _isHidden = true;
   bool _isTeacher = false;
+  bool isDataSaved = false;
 
   final repo = GetIt.instance.get<AuthRepo>();
 
@@ -48,6 +49,7 @@ class LoginViewModel extends BaseVm {
       if(value !=null){
         var userRole = await repo.checkUserRole(emailController.text);
         _isTeacher = userRole.isTeacher;
+        isDataSaved = userRole.isDataSaved;
       }
       EasyLoading.dismiss();
     }catch(e){

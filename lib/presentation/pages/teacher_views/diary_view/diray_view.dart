@@ -1,8 +1,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:fu_vms/presentation/configurations/size_config.dart';
+import 'package:fu_vms/presentation/pages/teacher_views/diary_view/diary_edit_view.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/diary_view/diary_vm.dart';
 import 'package:fu_vms/presentation/utils/i_utills.dart';
 import 'package:intl/intl.dart';
@@ -150,16 +152,6 @@ class _DiaryView extends State<DiaryView> {
                               // final TeacherNote note = notes[index];
 
                               return InkWell(
-                                onLongPress: (){
-                                  FirebaseFirestore.instance
-                                      .collection('teachers')
-                                      .doc(widget.teacherEmail)
-                                      .update({
-                                    'notes' : FieldValue.arrayRemove(
-                                        [snapshot.data![index].toMap()]
-                                    )
-                                  });
-                                },
                                 child: Card(
                                   elevation: 4,
                                   shape: RoundedRectangleBorder(
@@ -182,12 +174,53 @@ class _DiaryView extends State<DiaryView> {
                                         color: Colors.black54,
                                       ),
                                     ),
-                                    trailing: Text(
-                                      snapshot.data![index].timestamp != '' ? DateFormat('MMM d, yyyy').format(DateTime.parse(snapshot.data![index].timestamp)) : '',
-                                      style: const TextStyle(
-                                        fontSize: 12.0,
-                                        color: Colors.grey,
-                                      ),
+                                    trailing: Column(
+                                      children: [
+
+                                        SizedBox(
+                                          width : 70,
+                                          child: Row(
+
+                                            children: [
+                                              InkWell(
+                                                  onTap: (){
+                                                    FirebaseFirestore.instance
+                                                        .collection('teachers')
+                                                        .doc(widget.teacherEmail)
+                                                        .update({
+                                                      'notes' : FieldValue.arrayRemove(
+                                                          [snapshot.data![index].toMap()]
+                                                      )
+                                                    });
+                                                  },
+                                                  child: const Icon(Icons.delete,color: Colors.red,)),
+                                              const SizedBox(width: 10),
+                                              InkWell(
+                                                onTap: (){
+                                                  Navigator.of(context).push(
+                                                      CupertinoPageRoute(
+                                                          builder: (context) =>
+                                                              DiaryEditView(
+                                                                teacherEmail: widget.teacherEmail,
+                                                                index: index,
+                                                                timeTableModel: snapshot.data![index],
+                                                              )));
+                                                },
+                                                child: Icon(Icons.edit),
+                                              )
+                                            ],
+
+                                          ),
+                                        ),
+                                        SizedBox(height: 10,),
+                                        Text(
+                                          snapshot.data![index].timestamp != '' ? DateFormat('MMM d, yyyy').format(DateTime.parse(snapshot.data![index].timestamp)) : '',
+                                          style: const TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.grey,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                 ),

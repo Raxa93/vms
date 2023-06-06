@@ -16,7 +16,8 @@ class TeacherDataEntryViewModel extends ChangeNotifier {
   TextEditingController nameController = TextEditingController();
   TextEditingController phoneController = TextEditingController();
    File? imageFile;
-
+  static final FirebaseFirestore _db = FirebaseFirestore.instance;
+  final usersCollection = _db.collection('users');
   void setImageFile(File file) {
     imageFile = file;
     notifyListeners();
@@ -29,6 +30,7 @@ class TeacherDataEntryViewModel extends ChangeNotifier {
   Future saveTeacherData(context) async {
     EasyLoading.show();
     String userEmail = _localStorageService.getEmail;
+    usersCollection.doc(userEmail).set({'isDataSaved' : true},SetOptions(merge: true));
     final String base64File = base64Encode(await imageFile!.readAsBytes());
      _localStorageService.setTeacherImage = base64File;
      teacherFireStoreRepo.saveTeacherData(phoneController.text,nameController.text,imageFile!,userEmail).then((value) {

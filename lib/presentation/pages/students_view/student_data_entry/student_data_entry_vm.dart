@@ -27,7 +27,7 @@ class StudentDataEntryViewModel extends ChangeNotifier {
   TextEditingController sessionController = TextEditingController();
   File? imageFile;
   static final FirebaseFirestore _db = FirebaseFirestore.instance;
-  // final usersCollection = _db.collection('users');
+  final usersCollection = _db.collection('users');
   final studentCollection = _db.collection('students');
 
   void setImageFile(File file) {
@@ -41,7 +41,9 @@ class StudentDataEntryViewModel extends ChangeNotifier {
 
   Future saveStudentData(context) async {
     EasyLoading.show();
+
     String userEmail = _localStorageService.getEmail;
+    usersCollection.doc(userEmail).set({'isDataSaved' : true},SetOptions(merge: true));
     print('This is user email i got ${userEmail}');
     final String base64File = base64Encode(await imageFile!.readAsBytes());
     _localStorageService.setStudentImage = base64File;

@@ -89,7 +89,8 @@ class LoginView extends StatelessWidget {
                                               if(vm.isTeacher){
 
                                                 _localStorageService.setIsTeacher = true;
-                                               bool isTeacherDataSaved = _localStorageService.getIsTeacherDataSaved;
+                                               // bool isTeacherDataSaved = _localStorageService.getIsTeacherDataSaved;
+                                               bool isTeacherDataSaved = vm.isDataSaved;
                                                isTeacherDataSaved ?
                                                 Navigator.of(context).pushReplacementNamed(TeacherDashBoardScreen.routeName) :
                                                Navigator.of(context).pushReplacementNamed(TeacherDataEntryView.routeName)
@@ -97,7 +98,8 @@ class LoginView extends StatelessWidget {
                                               }
                                               else{
                                                 _localStorageService.setIsTeacher = false;
-                                                bool isStudentDataSaved = _localStorageService.getIsStudentDataSaved;
+                                                // bool isStudentDataSaved = _localStorageService.getIsStudentDataSaved;
+                                                bool isStudentDataSaved = vm.isDataSaved;
                                                 isStudentDataSaved ?
                                                 Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const StudentHomeView()))
                                                     :Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const StudentDataEntryView()));

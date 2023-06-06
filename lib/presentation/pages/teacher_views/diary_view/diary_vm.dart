@@ -61,4 +61,40 @@ class DiaryViewModel extends ChangeNotifier {
 
     }
   }
+
+
+  Future<bool> updateTimetableEntry(String teacherEmail,context,index) async {
+    EasyLoading.show();
+    final DocumentReference teacherDocRef = teacherCollection.doc(teacherEmail);
+    final DocumentSnapshot teacherDocSnapshot = await teacherDocRef.get();
+    final Map<String, dynamic> data = teacherDocSnapshot.data() as Map<String, dynamic>;
+    final List<dynamic> notes = data['notes'];
+
+    var updateTimeTable = TeacherNote(
+      description: descriptionController.text,
+      title: titleController.text,
+      timestamp: selectedDate.toString()
+    );
+    notes[index] = updateTimeTable.toMap();
+    try {
+      // Get the teacher document reference
+      notes[index] =updateTimeTable.toMap();
+      await teacherDocRef.update({'notes': notes});
+      // await  teacherDocRef.update({
+      //   '$arrayField.$index': updateTimeTable.toJson(),
+      // });
+      EasyLoading.dismiss();
+      return true;
+    } on FirebaseException catch (e) {
+      EasyLoading.dismiss();
+      iUtills().showMessage(context: context, title: 'OOpssss', text: e.toString());
+      return false;
+
+    } catch (e) {
+      EasyLoading.dismiss();
+      iUtills().showMessage(context: context, title: 'OOppsss', text: 'Something went wrong');
+      return false;
+
+    }
+  }
 }

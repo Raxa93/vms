@@ -7,6 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:fu_vms/presentation/pages/login/login_view.dart';
 
+import '../../data/datasources/local/preferences_service.dart';
+import '../../locator.dart';
+
 class NavDrawer extends StatefulWidget {
   String teacherName = '';
    NavDrawer({Key? key,required this.teacherName}) : super(key: key);
@@ -16,6 +19,8 @@ class NavDrawer extends StatefulWidget {
 }
 
 class _NavDrawerState extends State<NavDrawer> {
+  final LocalStorageService _localStorageService =
+  locator<LocalStorageService>();
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -108,7 +113,9 @@ class _NavDrawerState extends State<NavDrawer> {
               // TODO: Handle Student List tap
               final FirebaseAuth _auth = FirebaseAuth.instance;
               await _auth.signOut();
-
+_localStorageService.setIsLoggedIn = false;
+_localStorageService.setIsStudentDataSaved = false;
+_localStorageService.setIsTeacherDataSaved = false;
               Navigator.of(context).pushReplacement(
                   CupertinoPageRoute(
                       builder: (context) =>

@@ -82,16 +82,6 @@ class _TimeTableViewState extends State<TimeTableView> {
                           return null;
                         },
                       ),
-                      TextFormField(
-                        controller: vm.subjetController,
-                        decoration: const InputDecoration(labelText: 'Subject'),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter the Subject';
-                          }
-                          return null;
-                        },
-                      ),
                       const SizedBox(height: 16.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -230,30 +220,6 @@ class _TimeTableViewState extends State<TimeTableView> {
                                         // final timeSlot = timeSlots[index];
                                         final arrayField = 'timetable';
                                         return InkWell(
-                                          onLongPress: (){
-                                            print('I am pressed long');
-                                            FirebaseFirestore.instance
-                                                .collection('teachers')
-                                                .doc(widget.teacherEmail)
-                                                .update({
-                                              'timeTable' : FieldValue.arrayRemove(
-                                                  [snapshot.data![index].toJson()]
-                                              )
-                                            });
-                                          },
-                                          onTap: (){
-                                            Navigator.of(context).push(
-                                                CupertinoPageRoute(
-                                                    builder: (context) =>
-                                                        TimeTableEditView(
-                                                          teacherEmail: widget.teacherEmail,
-                                                          index: index,
-                                                          timeTableModel: snapshot.data![index],
-                                                        )));
-                                          },
-                                          // onTap: (){
-                                          //   print('Snapshot ${snapshot.data![index].documentId;}');
-                                          // },
                                           child: Container(
                                             margin: const EdgeInsets.all(8.0),
                                             decoration: BoxDecoration(
@@ -274,36 +240,57 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                 crossAxisAlignment: CrossAxisAlignment.start,
                                                 children: [
                                                   Row(
-                                                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                                                    children: const [
-                                                      Text(
+                                                    mainAxisAlignment: MainAxisAlignment.start,
+                                                    children:  [
+                                                      const Text(
                                                         'Venue',
                                                         style: TextStyle(
                                                           color: Colors.grey,
                                                           fontSize: 16.0,
                                                         ),
                                                       ),
-                                                      Text(
-                                                        'Subject',
-                                                        style: TextStyle(
-                                                          color: Colors.grey,
-                                                          fontSize: 16.0,
-                                                        ),
-                                                      ),
-                                                      Text(
+                                                      SizedBox(width: 40),
+                                                      const Text(
                                                         'Semester',
                                                         style: TextStyle(
                                                           color: Colors.grey,
                                                           fontSize: 16.0,
                                                         ),
                                                       ),
+                                                      SizedBox(width: 100),
+                                                      InkWell(
+                                                          onTap: (){
+                                                            FirebaseFirestore.instance
+                                                                .collection('teachers')
+                                                                .doc(widget.teacherEmail)
+                                                                .update({
+                                                              'timeTable' : FieldValue.arrayRemove(
+                                                                  [snapshot.data![index].toJson()]
+                                                              )
+                                                            });
+                                                          },
+                                                          child: const Icon(Icons.delete,color: Colors.red,)),
+                                                      const SizedBox(width: 10),
+                                                      InkWell(
+                                                          onTap: (){
+                                                            Navigator.of(context).push(
+                                                                CupertinoPageRoute(
+                                                                    builder: (context) =>
+                                                                        TimeTableEditView(
+                                                                          teacherEmail: widget.teacherEmail,
+                                                                          index: index,
+                                                                          timeTableModel: snapshot.data![index],
+                                                                        )));
+                                                          },
+                                                          child: Icon(Icons.edit,color: Colors.green,))
                                                     ],
                                                   ),
 
                                                   const SizedBox(height: 3.0),
                                                    Row(
-                                                     mainAxisAlignment: MainAxisAlignment.spaceAround,
+                                                     mainAxisAlignment: MainAxisAlignment.start,
                                                      children: [
+                                                       const SizedBox(width: 10),
                                                        Text(
                                                          snapshot.data![index].room,
                                                          style: const TextStyle(
@@ -312,14 +299,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                            fontWeight: FontWeight.bold,
                                                          ),
                                                        ),
-                                                       Text(
-                                                         snapshot.data![index].subject,
-                                                         style: const TextStyle(
-                                                           color: Colors.black,
-                                                           fontSize: 16.0,
-                                                           fontWeight: FontWeight.bold,
-                                                         ),
-                                                       ),
+                                                       const SizedBox(width: 80),
                                                        Text(
                                                          '${snapshot.data![index].semester}(${snapshot.data![index].section})',
                                                          style: const TextStyle(

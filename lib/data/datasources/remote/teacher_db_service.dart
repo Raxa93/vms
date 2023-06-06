@@ -34,6 +34,7 @@ class TeacherDbServices{
           await usersCollection.doc(email).set({
             'isTeacher': false,
             'uid': user.uid,
+            'isDataSaved': false,
           });
         }
         await Future.delayed(const Duration(seconds: 1));

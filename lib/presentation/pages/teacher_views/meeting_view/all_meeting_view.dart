@@ -45,8 +45,8 @@ class _MeetingScreenState extends State<MeetingScreen> {
                               teacherEmail: widget.teacherEmail,
                             )));
               },
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 8.0),
                 child: Icon(Icons.history),
               )),
           InkWell(
@@ -137,8 +137,17 @@ class _MeetingScreenState extends State<MeetingScreen> {
                       ],
                     ),
                     trailing: ElevatedButton(
-                      child: Text('End Meeting'),
-                     onPressed: (){
+                      child: const Text('End Meeting'),
+                     onPressed: () async {
+                    var abc =   await  _openDialog(context).then((value) {
+                      var meetingDocRef = FirebaseFirestore.instance
+                          .collection('teachers')
+                          .doc(widget.teacherEmail)
+                          .collection('meetings')
+                          .doc(meetingDoc.id);
+                      meetingDocRef.set({'feedBack': value},SetOptions(merge: true));
+                      });
+
                        var meetingDocRef = FirebaseFirestore.instance
                            .collection('teachers')
                            .doc(widget.teacherEmail)
@@ -161,6 +170,30 @@ class _MeetingScreenState extends State<MeetingScreen> {
 
         },
       ),
+    );
+  }
+
+  Future<String?> _openDialog(BuildContext context) async {
+    TextEditingController textController = TextEditingController();
+
+    return showDialog<String>(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Give Feed Back'),
+          content: TextField(
+            controller: textController,
+          ),
+          actions: [
+            TextButton(
+              child: const Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop(textController.text);
+              },
+            ),
+          ],
+        );
+      },
     );
   }
 }
