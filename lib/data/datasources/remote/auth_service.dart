@@ -89,7 +89,7 @@ class AuthService {
   }
 
   Future checkEmailVerification() async {
-     await FirebaseAuth.instance.currentUser?.reload(); // <- Also add brackets here
+     await FirebaseAuth.instance.currentUser?.reload();
      final user = FirebaseAuth.instance.currentUser;
      bool emailVerified = user!.emailVerified;
 

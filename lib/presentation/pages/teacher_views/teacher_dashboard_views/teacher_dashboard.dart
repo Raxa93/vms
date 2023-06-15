@@ -30,6 +30,8 @@ class _TeacherDashBoardScreenState extends State<TeacherDashBoardScreen> {
   @override
   void initState() {
     context.read<TeacherDashBoardVm>().getValueFromDisk();
+    context.read<TeacherDashBoardVm>().getValueDataFromFireBase();
+
     super.initState();
   }
 
@@ -135,13 +137,13 @@ class _TeacherDashBoardScreenState extends State<TeacherDashBoardScreen> {
                           child: CircleAvatar(
                             radius: 80,
                             backgroundColor: Colors.white, // Set a fallback background color
-                            backgroundImage: MemoryImage(base64.decode(vm.teacherImage)),
+                            backgroundImage: NetworkImage(vm.teacherImage),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.015),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -174,7 +176,7 @@ class _TeacherDashBoardScreenState extends State<TeacherDashBoardScreen> {
 
                     ],
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.012),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.05),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -183,13 +185,25 @@ class _TeacherDashBoardScreenState extends State<TeacherDashBoardScreen> {
                           Navigator.of(context).push(
                               CupertinoPageRoute(
                                   builder: (context) =>
-                                      NewMeetingView(
-                                        teacherEmail: vm.teacherEmail,
-                                      )));
+                                  const StudentListView(
+
+                                  )));
                         },
-                        icon: Icons.create,
-                        text: 'Create Meetings',
+                        icon: Icons.people,
+                        text: 'Student List',
                       ),
+                      // RoundedContainer(
+                      //   onTap: () {
+                      //     Navigator.of(context).push(
+                      //         CupertinoPageRoute(
+                      //             builder: (context) =>
+                      //                 NewMeetingView(
+                      //                   teacherEmail: vm.teacherEmail,
+                      //                 )));
+                      //   },
+                      //   icon: Icons.create,
+                      //   text: 'Create Meetings',
+                      // ),
                       SizedBox(width: MediaQuery.of(context).size.width * 0.05),
                       RoundedContainer(
                         onTap: () {
@@ -206,32 +220,32 @@ class _TeacherDashBoardScreenState extends State<TeacherDashBoardScreen> {
 
                     ],
                   ),
-                  SizedBox(height: MediaQuery.of(context).size.height * 0.012),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      RoundedContainer(
-                        onTap: () {
-                          Navigator.of(context).push(
-                              CupertinoPageRoute(
-                                  builder: (context) =>
-                                      const StudentListView(
-
-                                      )));
-                        },
-                        icon: Icons.people,
-                        text: 'Student List',
-                      ),
-                      SizedBox(width: MediaQuery.of(context).size.width * 0.05),
-                      // RoundedContainer(
-                      //   onTap: () {
-                      //
-                      //   },
-                      //   icon: Icons.group,
-                      //   text: 'Groups',
-                      // ),
-                    ],
-                  ),
+                  // SizedBox(height: MediaQuery.of(context).size.height * 0.012),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     RoundedContainer(
+                  //       onTap: () {
+                  //         Navigator.of(context).push(
+                  //             CupertinoPageRoute(
+                  //                 builder: (context) =>
+                  //                     const StudentListView(
+                  //
+                  //                     )));
+                  //       },
+                  //       icon: Icons.people,
+                  //       text: 'Student List',
+                  //     ),
+                  //     SizedBox(width: MediaQuery.of(context).size.width * 0.05),
+                  //     // RoundedContainer(
+                  //     //   onTap: () {
+                  //     //
+                  //     //   },
+                  //     //   icon: Icons.group,
+                  //     //   text: 'Groups',
+                  //     // ),
+                  //   ],
+                  // ),
                 ],
               ),
             )

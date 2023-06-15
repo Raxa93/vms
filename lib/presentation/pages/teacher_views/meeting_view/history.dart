@@ -101,6 +101,15 @@ class _MeetingHistoryScreen extends State<MeetingHistoryScreen> {
                             color: Colors.grey[600],
                           ),
                         ),
+                        const SizedBox(height: 8.0),
+                        Text(
+                          'Meeting With : ${meetingData['meetingWith'] ?? 'Not Required'}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                        const SizedBox(height: 8.0),
                       ],
                     ),
                     onTap: () {

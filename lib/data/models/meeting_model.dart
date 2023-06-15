@@ -10,6 +10,7 @@ class Meeting {
   late String endTime;
   late bool approved;
   late bool inProgress;
+  late String meetingWith;
   late String requestedFrom;
 
 
@@ -21,6 +22,7 @@ class Meeting {
     required this.endDateTime,
     required this.startTime,
     required this.endTime,
+    required this.meetingWith,
     required this.approved,
     required this.inProgress,
     required this.requestedFrom,
@@ -39,6 +41,7 @@ class Meeting {
       'requestedFrom': requestedFrom,
       'startTime': startTime,
       'endTime': endTime,
+      'meetingWith': meetingWith,
 
     };
   }
@@ -55,6 +58,7 @@ class Meeting {
       requestedFrom: json['requestedFrom'],
       startTime: json['startTime'],
       endTime: json['endTime'],
+      meetingWith: json['meetingWith'],
     );
   }
 }

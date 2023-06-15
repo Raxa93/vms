@@ -1,10 +1,11 @@
+// ignore_for_file: prefer_const_declarations
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fu_vms/data/models/time_table_model.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/time_table_view/time_table_edit_view.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/time_table_view/time_table_vm.dart';
-import 'package:fu_vms/presentation/utils/utils_extensions.dart';
 import 'package:provider/provider.dart';
 
 import '../../../configurations/size_config.dart';
@@ -78,6 +79,18 @@ class _TimeTableViewState extends State<TimeTableView> {
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter the room';
+                          }
+                          return null;
+                        },
+                      ),
+                      const SizedBox(height: 16.0),
+
+                      TextFormField(
+                        controller: vm.subjetController,
+                        decoration: const InputDecoration(labelText: 'Subject'),
+                        validator: (value) {
+                          if (value == null || value.isEmpty) {
+                            return 'Please enter the subject';
                           }
                           return null;
                         },
@@ -249,7 +262,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                           fontSize: 16.0,
                                                         ),
                                                       ),
-                                                      SizedBox(width: 40),
+                                                      const SizedBox(width: 40),
                                                       const Text(
                                                         'Semester',
                                                         style: TextStyle(
@@ -257,7 +270,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                           fontSize: 16.0,
                                                         ),
                                                       ),
-                                                      SizedBox(width: 100),
+                                                      const SizedBox(width: 80),
                                                       InkWell(
                                                           onTap: (){
                                                             FirebaseFirestore.instance
@@ -270,7 +283,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                             });
                                                           },
                                                           child: const Icon(Icons.delete,color: Colors.red,)),
-                                                      const SizedBox(width: 10),
+                                                      const SizedBox(width: 20),
                                                       InkWell(
                                                           onTap: (){
                                                             Navigator.of(context).push(
@@ -282,7 +295,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                                           timeTableModel: snapshot.data![index],
                                                                         )));
                                                           },
-                                                          child: Icon(Icons.edit,color: Colors.green,))
+                                                          child: const Icon(Icons.edit,color: Colors.green,))
                                                     ],
                                                   ),
 
@@ -330,7 +343,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                           ),
                                                           const SizedBox(height: 8.0),
                                                           Text(
-                                                            '${snapshot.data![index].startTime}',
+                                                            snapshot.data![index].startTime,
                                                             style: const TextStyle(
                                                               color: Colors.black,
                                                               fontSize: 16.0,
@@ -352,7 +365,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                           ),
                                                           const SizedBox(height: 8.0),
                                                           Text(
-                                                            '${snapshot.data![index].endTime}',
+                                                            snapshot.data![index].endTime,
                                                             style: const TextStyle(
                                                               color: Colors.black,
                                                               fontSize: 16.0,
@@ -374,7 +387,7 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                           ),
                                                           const SizedBox(height: 8.0),
                                                           Text(
-                                                            '${snapshot.data![index].startDate}',
+                                                            snapshot.data![index].startDate,
                                                             style: const TextStyle(
                                                               color: Colors.black,
                                                               fontSize: 16.0,
@@ -383,6 +396,36 @@ class _TimeTableViewState extends State<TimeTableView> {
                                                           ),
                                                         ],
                                                       ),
+                                                    ],
+                                                  ),
+                                                  const SizedBox(height: 16.0),
+                                                  Row(
+                                                    mainAxisAlignment:
+                                                    MainAxisAlignment.spaceBetween,
+                                                    children: [
+                                                      Column(
+                                                        crossAxisAlignment:
+                                                        CrossAxisAlignment.start,
+                                                        children:  [
+                                                          const Text(
+                                                            'Subject',
+                                                            style: TextStyle(
+                                                              color: Colors.grey,
+                                                              fontSize: 14.0,
+                                                            ),
+                                                          ),
+                                                          const SizedBox(height: 8.0),
+                                                          Text(
+                                                            snapshot.data![index].subject,
+                                                            style: const TextStyle(
+                                                              color: Colors.black,
+                                                              fontSize: 16.0,
+                                                              fontWeight: FontWeight.bold,
+                                                            ),
+                                                          ),
+                                                        ],
+                                                      ),
+
                                                     ],
                                                   ),
                                                 ],

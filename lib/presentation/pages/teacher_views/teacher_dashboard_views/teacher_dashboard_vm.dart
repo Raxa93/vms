@@ -1,7 +1,9 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:from_to_time_picker/from_to_time_picker.dart';
 import 'package:fu_vms/data/models/meeting_data_model.dart';
+import 'package:fu_vms/data/models/teacher_model.dart';
 import 'package:get_it/get_it.dart';
 
 import '../../../../data/datasources/local/preferences_service.dart';
@@ -18,6 +20,28 @@ class TeacherDashBoardVm extends ChangeNotifier{
   final teacherFireStoreRepo = GetIt.instance.get<TeacherRepoImp>();
   final LocalStorageService _localStorageService =
   locator<LocalStorageService>();
+  static final FirebaseFirestore _db = FirebaseFirestore.instance;
+
+  final teacherCollection = _db.collection('teachers');
+ TeacherModel? teacher;
+
+  getValueDataFromFireBase() async {
+
+      try {
+      var data =  await teacherCollection.doc(_localStorageService.getEmail).get();
+          teacher = TeacherModel.fromSnapshot(data);
+          if(teacher != null){
+            teacherName = teacher!.teacherName.toString();
+            teacherImage = teacher!.imageUrl.toString();
+            print('Teacher image $teacherImage');
+          }
+
+      } on FirebaseException catch (e) {
+        debugPrint("Exception in Fav $e");
+        rethrow;
+      }
+
+  }
 
   getValueFromDisk(){
    teacherName = _localStorageService.getTeacherName;

@@ -9,13 +9,14 @@ class StudentModel{
   String session;
   String section;
   String shift;
+  String token;
 
-  StudentModel({required this.studentName,required this.phoneNumber,required this.imageUrl,required this.semester,required this.session,required this.section,required this.shift});
+  StudentModel({required this.studentName,required this.token,required this.phoneNumber,required this.imageUrl,required this.semester,required this.session,required this.section,required this.shift});
 
 
   factory StudentModel.fromJson(Map<String, dynamic> json) {
-    print('I got data ${json['studentName']}');
-    print('I got data ${json['section']}');
+    // print('I got data ${json['studentName']}');
+    // print('I got data ${json['section']}');
     return StudentModel(
       studentName: json['studentName'],
       section: json['section'],
@@ -24,6 +25,7 @@ class StudentModel{
       phoneNumber: json['phoneNumber'],
       imageUrl: json['imageUrl'],
       session: json['session'],
+      token: json['fcmToken']
     );
   }
 

@@ -86,7 +86,7 @@ class _RequestMeetingViewState extends State<RequestMeetingView> {
                           onPressed: ()async {
 
                             if (_formKey.currentState!.validate()) {
-                              await vm.saveMeeting(widget.teacher.teacherTimeTable.first.teacherEmail, context,widget.startTime,widget.endTime).then((value) {
+                              await vm.saveMeeting(widget.teacher.teacherTimeTable.first.teacherEmail, context,widget.startTime,widget.endTime,studentName).then((value) {
                                 sendNotifications(teacherName: widget.teacher.teacherName,
                               teacherFcm: widget.teacher.token,
                                    endTime: widget.endTime,

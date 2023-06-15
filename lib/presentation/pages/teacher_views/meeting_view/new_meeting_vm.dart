@@ -152,7 +152,7 @@ class NewMeetingVm extends ChangeNotifier{
     return result;
   }
 
-  saveMeeting(String teacherEmail,context) async {
+  Future saveMeeting(String teacherEmail,context,String meetingWith) async {
     EasyLoading.show();
     var newMeeting = Meeting(
       title: titleController.text,
@@ -164,6 +164,7 @@ class NewMeetingVm extends ChangeNotifier{
       approved: true,
       venue: roomController.text,
       inProgress: true,
+      meetingWith: meetingWith,
       requestedFrom: teacherEmail
     );
     try {

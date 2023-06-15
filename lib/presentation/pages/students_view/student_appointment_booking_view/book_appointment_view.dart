@@ -373,6 +373,8 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
   }
 
   Future generateAvailableTimeSlots() async {
+    print('let me generate time slots');
+    print('teacher email i got ${widget.teacher.teacherTimeTable.first.teacherEmail}');
     List<String> timeSlots = [];
 
     final DateFormat timeFormat = DateFormat('h:mm a');

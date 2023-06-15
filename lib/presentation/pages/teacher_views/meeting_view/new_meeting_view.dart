@@ -1,15 +1,19 @@
 
 
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:http/http.dart' as http;
+import '../../../../data/models/stduent_model.dart';
 import 'new_meeting_vm.dart';
 
 class NewMeetingView extends StatefulWidget {
   String teacherEmail = '';
+  StudentModel studentModel ;
 
-  NewMeetingView({Key? key,required this.teacherEmail}) : super(key: key);
+  NewMeetingView({Key? key,required this.teacherEmail,required this.studentModel}) : super(key: key);
 
   @override
   State<NewMeetingView> createState() => _NewMeetingView();
@@ -21,6 +25,7 @@ class _NewMeetingView extends State<NewMeetingView> {
   void initState() {
 
     super.initState();
+    print('Student token is ${widget.studentModel.token}');
   }
 
   final _formKey = GlobalKey<FormState>();
@@ -35,7 +40,7 @@ class _NewMeetingView extends State<NewMeetingView> {
           child: SafeArea(
             child: Scaffold(
               appBar: AppBar(
-                title: const Text('Create Meeting'),
+                title:  Text('Create Meeting with ${widget.studentModel.studentName.toString()}',style: TextStyle(fontSize: 14),),
               ),
               body: Form(
                 key: _formKey,
@@ -168,7 +173,16 @@ class _NewMeetingView extends State<NewMeetingView> {
                           onPressed: ()async {
 
                             if (_formKey.currentState!.validate()) {
-                               await vm.saveMeeting(widget.teacherEmail, context);
+                               await vm.saveMeeting(widget.teacherEmail, context,widget.studentModel.studentName).whenComplete(() {
+                                 sendNotifications(
+                                   teacherName: widget.teacherEmail,
+                                   venue: vm.roomController.text,
+                                   endTime: vm.toTimeController.text,
+                                   startTime: vm.fromTimeController.text,
+                                   studentFcm: widget.studentModel.token,
+                                 );
+                               });
+
                               // if(success == true){
                               //   // iUtills().showMessage(context: context, title: 'Success', text: 'TimeTable Updated successfully');
                               //   vm.sectionController.text = '';
@@ -204,4 +218,42 @@ class _NewMeetingView extends State<NewMeetingView> {
     context.read<NewMeetingVm>().destroyModel();
     return Future.value(false);
   }
+
+  void sendNotifications({required String studentFcm, required  String teacherName,required String venue ,required  String startTime, required String endTime}) async {
+    const String serverKey = 'AAAApmPcZ3g:APA91bHpDR5ojrP6bUA3v1Pnp4sfSWhNfxrUnjdlRALpRu-yb6vREOJhnh06m6MK1zrdEc8sQfC4NwcxSg5_i_i94aGV55LxrHRjE27RK_BEk4dpPB8RDFYAGCMiwlx1vqR3s1F-bbQa';
+
+    const String url = 'https://fcm.googleapis.com/fcm/send';
+
+    Map<String, String> headers = {
+      'Content-Type': 'application/json',
+      'Authorization': 'key=$serverKey',
+    };
+
+    Map<String, dynamic> notification = {
+      'title': 'Meeting Created',
+      'body': 'Dear Student, $teacherName has created meeting with you at $venue from $startTime to $endTime',
+    };
+
+    Map<String, dynamic> requestBody = {
+      'notification': notification,
+      'to': studentFcm,
+    };
+
+    try {
+      final response = await http.post(
+        Uri.parse(url),
+        headers: headers,
+        body: jsonEncode(requestBody),
+      );
+
+      if (response.statusCode == 200) {
+        print('Notification sent successfully');
+      } else {
+        print('Failed to send notification');
+      }
+    } catch (e) {
+      print('Error sending notification: $e');
+    }
+  }
+
 }

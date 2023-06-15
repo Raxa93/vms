@@ -156,6 +156,7 @@ notifyListeners();
         section: sectionController.text,
         semester: semesterController.text,
         room: roomController.text,
+
         startDate: fromDateController.text,
         endDate: toDateController.text,
         startTime: fromTimeController.text,
@@ -248,6 +249,7 @@ notifyListeners();
     toTimeController.text = '';
     fromDateController.text = '';
     fromTimeController.text = '';
+    subjetController.text = '';
     notifyListeners();
   }
 }

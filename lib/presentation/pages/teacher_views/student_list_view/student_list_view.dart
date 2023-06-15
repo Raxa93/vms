@@ -1,10 +1,12 @@
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fu_vms/presentation/pages/teacher_views/student_list_view/student_list_vm.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../data/models/stduent_model.dart';
 import '../../../configurations/size_config.dart';
+import '../meeting_view/new_meeting_view.dart';
 
 class StudentListView extends StatefulWidget {
   const StudentListView({Key? key}) : super(key: key);
@@ -18,6 +20,7 @@ class _StudentListViewState extends State<StudentListView> {
   @override
   void initState() {
     Provider.of<StudentListVm>(context, listen: false).getStudents();
+    context.read<StudentListVm>().getValueFromDisk();
     super.initState();
   }
   @override
@@ -65,7 +68,7 @@ class _StudentListViewState extends State<StudentListView> {
                       .toList();
 
                   return SizedBox(
-                    height: SizeConfig.screenHeight! * 0.5,
+                    height: SizeConfig.screenHeight! * 0.9,
                     child: ListView.builder(
                       itemCount: filteredStudents.length,
                       itemBuilder: (BuildContext context, int index) {
@@ -74,7 +77,7 @@ class _StudentListViewState extends State<StudentListView> {
                         return Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                           child: Container(
-                            height: SizeConfig.screenHeight! * 0.14,
+                            // height: SizeConfig.screenHeight! * 0.14,
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.0),
                               border: Border.all(color: Colors.grey.shade300),
@@ -126,6 +129,23 @@ class _StudentListViewState extends State<StudentListView> {
                                           fontSize: 14,
                                         ),
                                       ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 10,),
+                                  Row(
+                                    children: [
+                                      const SizedBox(width: 4),
+                                      ElevatedButton(onPressed: (){
+
+                                        Navigator.of(context).push(
+                                            CupertinoPageRoute(
+                                                builder: (context) =>
+                                                    NewMeetingView(
+                                                      teacherEmail: vm.teacherEmail,
+                                                      studentModel: student,
+                                                    )));
+
+                                      }, child: const Text('Create Meeting'))
                                     ],
                                   ),
                                 ],

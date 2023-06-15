@@ -134,6 +134,15 @@ class _MeetingScreenState extends State<MeetingScreen> {
                             color: Colors.grey[600],
                           ),
                         ),
+                        const SizedBox(height: 8.0),
+                        Text(
+                          'Meeting with: ${meetingData['meetingWith'] ?? 'Not required'}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                        const SizedBox(height: 8.0),
                       ],
                     ),
                     trailing: ElevatedButton(
