@@ -405,7 +405,8 @@ String pickedDate = '';
 if(selectedDate != null) {
   pickedDate = selectedDate.formatDateToString();
   QuerySnapshot meetingsSnapshot = await meetingsCollection.where(
-      'startDateTime', isEqualTo: selectedDate.formatDateToString()).get();
+      'startDateTime', isEqualTo: selectedDate.formatDateToString()).where('startDateTime', isEqualTo: true)
+      .get();
 
   print('I got meeting ${meetingsSnapshot.docs.length}');
   setState(() {

@@ -87,7 +87,7 @@ class _MeetingHistoryScreen extends State<MeetingHistoryScreen> {
                         ),
                         const SizedBox(height: 8.0),
                         Text(
-                          'Start Time: ${meetingData['startDateTime']}',
+                          'Date: ${meetingData['startDateTime']}',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey[600],
@@ -95,7 +95,7 @@ class _MeetingHistoryScreen extends State<MeetingHistoryScreen> {
                         ),
                         const SizedBox(height: 8.0),
                         Text(
-                          'End Time: ${meetingData['endDateTime']}',
+                          'Time: ${meetingData['startTime']} to ${meetingData['endTime']}',
                           style: TextStyle(
                             fontSize: 16,
                             color: Colors.grey[600],
