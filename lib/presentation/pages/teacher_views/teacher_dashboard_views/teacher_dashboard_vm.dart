@@ -44,6 +44,8 @@ class TeacherDashBoardVm extends ChangeNotifier{
           if(teacher != null){
             setTeacherName = teacher!.teacherName.toString();
             setTeacherImage = teacher!.imageUrl.toString();
+            _localStorageService.setTeacherName = teacher!.teacherName.toString();
+            _localStorageService.setTeacherImage = teacher!.imageUrl.toString();
             print('Teacher image $teacherImage');
           }
 
