@@ -26,15 +26,12 @@ class StudentHomeView extends StatefulWidget {
 class _StudentHomeViewState extends State<StudentHomeView> {
   final LocalStorageService _localStorageService = locator<LocalStorageService>();
 
-   String studentName = '';
-   String studentImage = '';
-   String studentEmail = '';
+
   @override
   void initState() {
     Provider.of<StudentHomeViewModel>(context, listen: false).getTeachers();
-    studentName = _localStorageService.getStudentName;
-    studentImage = _localStorageService.getStudentImage;
-    studentEmail = _localStorageService.getEmail;
+    Provider.of<StudentHomeViewModel>(context, listen: false).getValueDataFromFireBase();
+
     super.initState();
   }
 
@@ -45,7 +42,7 @@ class _StudentHomeViewState extends State<StudentHomeView> {
       builder: (context, vm, child) {
         return SafeArea(
           child: Scaffold(
-drawer: StudentDrawer(studentName: studentName,studentImage: studentImage,studentEmail: studentEmail),
+drawer: StudentDrawer(studentName: vm.studentName,studentImage: vm.studentImage,studentEmail: vm.studentEmail),
             appBar: AppBar(
               title: const Text('Student DashBoard'),
             ),

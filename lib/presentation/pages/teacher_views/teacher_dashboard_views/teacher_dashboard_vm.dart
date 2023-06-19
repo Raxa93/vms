@@ -1,5 +1,6 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:from_to_time_picker/from_to_time_picker.dart';
 import 'package:fu_vms/data/models/meeting_data_model.dart';
@@ -46,6 +47,9 @@ class TeacherDashBoardVm extends ChangeNotifier{
             setTeacherImage = teacher!.imageUrl.toString();
             _localStorageService.setTeacherName = teacher!.teacherName.toString();
             _localStorageService.setTeacherImage = teacher!.imageUrl.toString();
+            String? token = await FirebaseMessaging.instance.getToken();
+            await FirebaseFirestore.instance.collection('teachers').doc(_localStorageService.getEmail).set({'fcmToken': token},SetOptions(merge: true));
+
             print('Teacher image $teacherImage');
           }
 

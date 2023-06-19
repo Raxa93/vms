@@ -60,7 +60,8 @@ class TeacherDbServices{
         'fcmToken': token,
         'imageUrl': imageUrl,
       };
-      await teacherCollection.doc(userEmail).set(data,SetOptions(merge: true));}
+      await teacherCollection.doc(userEmail).set(data,SetOptions(merge: true));
+    }
 
     catch(e){
       debugPrint('Exception while saving teacher data $e');

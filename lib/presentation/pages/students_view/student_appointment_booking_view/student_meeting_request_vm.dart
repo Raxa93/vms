@@ -2,6 +2,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:fu_vms/presentation/utils/utils_extensions.dart';
 
 import '../../../../data/datasources/local/preferences_service.dart';
 import '../../../../data/models/meeting_model.dart';
@@ -28,8 +29,8 @@ class MeetingRequestVm extends ChangeNotifier{
     var newMeeting = Meeting(
         title: titleController.text,
         description: descriptionController.text,
-        startDateTime: DateTime.now().toString(),
-        endDateTime: DateTime.now().toString(),
+        startDateTime: DateTime.now().formatDateToString(),
+        endDateTime: DateTime.now().formatDateToString(),
         startTime: startTime,
         endTime: endTime,
         approved: false,

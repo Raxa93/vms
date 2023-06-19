@@ -1,5 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
@@ -80,14 +82,15 @@ class LoginView extends StatelessWidget {
                                 style: AppStyle.elevatedButtonStyle,
                                 onPressed: () async =>
                                     _formKey.currentState!.validate()
-                                        ? await vm.loginWithEmailAndPassword(context).then((value) {
+                                        ? await vm.loginWithEmailAndPassword(context).then((value) async {
                                               debugPrint('Value in view $value');
                                             if (value != null) {
                                               EasyLoading.dismiss();
                                               _localStorageService.setIsLoggedIn = true;
                                               _localStorageService.setUserEmail = value;
                                               if(vm.isTeacher){
-
+                                                String? token = await FirebaseMessaging.instance.getToken();
+                                                await FirebaseFirestore.instance.collection('teachers').doc(value).set({'fcmToken': token},SetOptions(merge: true));
                                                 _localStorageService.setIsTeacher = true;
                                                // bool isTeacherDataSaved = _localStorageService.getIsTeacherDataSaved;
                                                bool isTeacherDataSaved = vm.isDataSaved;
@@ -104,6 +107,8 @@ class LoginView extends StatelessWidget {
 
                                                 // bool isStudentDataSaved = _localStorageService.getIsStudentDataSaved;
                                                 bool isStudentDataSaved = vm.isDataSaved;
+                                                String? token = await FirebaseMessaging.instance.getToken();
+                                                await FirebaseFirestore.instance.collection('students').doc(value).set({'fcmToken': token},SetOptions(merge: true));
                                                 if(isStudentDataSaved){
                                                   _localStorageService.setIsStudentDataSaved = true;
                                                 }

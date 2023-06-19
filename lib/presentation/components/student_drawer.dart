@@ -53,7 +53,7 @@ class _StudentDrawer extends State<StudentDrawer> {
             currentAccountPicture:  CircleAvatar(
               radius: 80,
               backgroundColor: Colors.white, // Set a fallback background color
-              backgroundImage: MemoryImage(base64.decode(widget.studentImage)),
+              backgroundImage: NetworkImage(widget.studentImage),
             ),
           ),
           ListTile(

@@ -130,7 +130,7 @@ class _MeetingApprovalScreen extends State<MeetingApprovalScreen> {
                         meetingDocRef.update({'approved': true})
                             .then((_) {
                           EasyLoading.dismiss();
-                             sendNotifications(studentFcm: fcmToken.toString(), teacherName: widget.teacherEmail,startTime: meetingData['startTime'],endTime: meetingData['endTime']);
+                             sendNotifications(date: meetingData['startDateTime'],studentFcm: fcmToken.toString(), teacherName: widget.teacherEmail,startTime: meetingData['startTime'],endTime: meetingData['endTime']);
                          iUtills().showMessage(context: context, title: 'Success', text: 'Meeting approved');
                         }).catchError((error) {
                           EasyLoading.dismiss();
@@ -156,7 +156,7 @@ class _MeetingApprovalScreen extends State<MeetingApprovalScreen> {
     );
   }
 
-  void sendNotifications({required String studentFcm, required  String teacherName, required  String startTime, required String endTime}) async {
+  void sendNotifications({required String studentFcm, required  String teacherName, required  String startTime, required String endTime,required String date}) async {
     const String serverKey = 'AAAApmPcZ3g:APA91bHpDR5ojrP6bUA3v1Pnp4sfSWhNfxrUnjdlRALpRu-yb6vREOJhnh06m6MK1zrdEc8sQfC4NwcxSg5_i_i94aGV55LxrHRjE27RK_BEk4dpPB8RDFYAGCMiwlx1vqR3s1F-bbQa';
 
     const String url = 'https://fcm.googleapis.com/fcm/send';
@@ -168,7 +168,7 @@ class _MeetingApprovalScreen extends State<MeetingApprovalScreen> {
 
     Map<String, dynamic> notification = {
       'title': 'Meeting Request Approved',
-      'body': 'Dear Student, Your meeting request with $teacherName from $startTime To $endTime is approve.kindly be on time',
+      'body': 'Dear Student, Your meeting request with $teacherName from $startTime To $endTime on $date is approve.kindly be on time',
     };
 
     Map<String, dynamic> requestBody = {

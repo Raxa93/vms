@@ -83,8 +83,8 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
                     itemBuilder: (context, index) {
                       return InkWell(
                         onTap: () {
-                          String timeSlot = '8:00 AM - 8:30 AM';
-                          List<String> timeComponents = timeSlot.split(' - ');
+                          // String timeSlot = '8:00 AM - 8:30 AM';
+                          List<String> timeComponents = availableTimeSlots[index].split(' - ');
 
                           String startTime = timeComponents[0]; // 8:00 AM
                           String endTime = timeComponents[1];
@@ -322,7 +322,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
         return AlertDialog(
           title: const Text('Request Meeting'),
           content:
-              const Text('Do you want to request a meeting at this time slot?'),
+               Text('Do you want to request a meeting from $startTime to $endTime?'),
           actions: [
             TextButton(
               onPressed: () {

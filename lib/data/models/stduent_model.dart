@@ -1,5 +1,7 @@
 
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class StudentModel{
 
   String studentName;
@@ -29,5 +31,20 @@ class StudentModel{
     );
   }
 
+  factory StudentModel.fromSnapshot(DocumentSnapshot docSnapshot) {
+    // print('Brother i got agency name ${docSnapshot.get('agencyName')}');
 
+
+    return StudentModel(
+      studentName: docSnapshot.get('studentName'),
+      phoneNumber: docSnapshot.get('phoneNumber'),
+      imageUrl: docSnapshot.get('imageUrl'),
+      token: docSnapshot.get('fcmToken'),
+      section: docSnapshot.get('section'),
+      semester: docSnapshot.get('semester'),
+      shift: docSnapshot.get('shift'),
+        session: docSnapshot.get('session'),
+
+    );
+  }
 }
