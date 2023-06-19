@@ -25,14 +25,25 @@ class TeacherDashBoardVm extends ChangeNotifier{
   final teacherCollection = _db.collection('teachers');
  TeacherModel? teacher;
 
+
+ set setTeacherName(var newVal) {
+   teacherName = newVal;
+   notifyListeners();
+ }
+
+  set setTeacherImage(var newVal) {
+    teacherImage = newVal;
+    notifyListeners();
+  }
+
   getValueDataFromFireBase() async {
 
       try {
       var data =  await teacherCollection.doc(_localStorageService.getEmail).get();
           teacher = TeacherModel.fromSnapshot(data);
           if(teacher != null){
-            teacherName = teacher!.teacherName.toString();
-            teacherImage = teacher!.imageUrl.toString();
+            setTeacherName = teacher!.teacherName.toString();
+            setTeacherImage = teacher!.imageUrl.toString();
             print('Teacher image $teacherImage');
           }
 
