@@ -94,17 +94,17 @@ class _MeetingApprovalScreen extends State<MeetingApprovalScreen> {
                         ),
                         const SizedBox(height: 8.0),
                         Text(
-                          'Start Time: ${meetingData['startTime']}',
+                          'Start Time: ${meetingData['startDateTime']} (${meetingData['startTime']})',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 15,
                             color: Colors.grey[600],
                           ),
                         ),
                         const SizedBox(height: 8.0),
                         Text(
-                          'End Time: ${meetingData['endTime']}',
+                          'End Time: ${meetingData['startDateTime']} (${meetingData['endTime']})',
                           style: TextStyle(
-                            fontSize: 16,
+                            fontSize: 15,
                             color: Colors.grey[600],
                           ),
                         ),

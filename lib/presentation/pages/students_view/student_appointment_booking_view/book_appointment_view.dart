@@ -22,7 +22,7 @@ class TeacherDetailScreen extends StatefulWidget {
 class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
   List<String> availableTimeSlots = [];
   bool showTimeSlot = false;
-
+String pickedDate = '';
   @override
   void initState() {
     // generateAvailableTimeSlots();
@@ -337,6 +337,7 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
                           teacher: teacher,
                           startTime: startTime,
                           endTime: endTime,
+                      meetingDate: pickedDate,
                         )));
               },
               child: const Text('Yes'),
@@ -402,8 +403,10 @@ class _TeacherDetailScreenState extends State<TeacherDetailScreen> {
           .doc(widget.teacher.teacherTimeTable.first.teacherEmail)
           .collection('meetings');
 if(selectedDate != null) {
+  pickedDate = selectedDate.formatDateToString();
   QuerySnapshot meetingsSnapshot = await meetingsCollection.where(
       'startDateTime', isEqualTo: selectedDate.formatDateToString()).get();
+
   print('I got meeting ${meetingsSnapshot.docs.length}');
   setState(() {
     availableTimeSlots = List<String>.from(timeSlots);

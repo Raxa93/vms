@@ -12,8 +12,9 @@ import '../../../../locator.dart';
 class RequestMeetingView extends StatefulWidget {
   TeacherModel teacher;
   String startTime;
+  String meetingDate;
   String endTime;
-   RequestMeetingView({Key? key,required this.teacher,required this.startTime,required this.endTime}) : super(key: key);
+   RequestMeetingView({Key? key,required this.meetingDate,required this.teacher,required this.startTime,required this.endTime}) : super(key: key);
 
   @override
   State<RequestMeetingView> createState() => _RequestMeetingViewState();
@@ -86,14 +87,14 @@ class _RequestMeetingViewState extends State<RequestMeetingView> {
                           onPressed: ()async {
 
                             if (_formKey.currentState!.validate()) {
-                              await vm.saveMeeting(widget.teacher.teacherTimeTable.first.teacherEmail, context,widget.startTime,widget.endTime,studentName).then((value) {
+                              await vm.saveMeeting(widget.teacher.teacherTimeTable.first.teacherEmail, context,widget.startTime,widget.endTime,studentName,widget.meetingDate).then((value) {
                                 sendNotifications(
                                   teacherName: widget.teacher.teacherName,
                                 teacherFcm: widget.teacher.token,
                                    endTime: widget.endTime,
                                   startTime: widget.startTime,
                                   studentName: studentName,
-
+                                  pickedDate: widget.meetingDate,
                                 );
 
                               });
@@ -135,7 +136,7 @@ class _RequestMeetingViewState extends State<RequestMeetingView> {
 
 
 
-  void sendNotifications({required String teacherFcm, required  String teacherName, required  String startTime, required String endTime, required  String studentName}) async {
+  void sendNotifications({required String pickedDate,required String teacherFcm, required  String teacherName, required  String startTime, required String endTime, required  String studentName}) async {
     const String serverKey = 'AAAApmPcZ3g:APA91bHpDR5ojrP6bUA3v1Pnp4sfSWhNfxrUnjdlRALpRu-yb6vREOJhnh06m6MK1zrdEc8sQfC4NwcxSg5_i_i94aGV55LxrHRjE27RK_BEk4dpPB8RDFYAGCMiwlx1vqR3s1F-bbQa';
 
     const String url = 'https://fcm.googleapis.com/fcm/send';
@@ -147,7 +148,7 @@ class _RequestMeetingViewState extends State<RequestMeetingView> {
 
     Map<String, dynamic> notification = {
       'title': 'Meeting Request Received',
-      'body': 'Dear $teacherName, You have received meeting request from $studentName from $startTime To $endTime',
+      'body': 'Dear $teacherName, You have received meeting request from $studentName from $startTime To $endTime on $pickedDate',
     };
 
     Map<String, dynamic> requestBody = {
