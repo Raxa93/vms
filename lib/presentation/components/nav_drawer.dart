@@ -27,11 +27,7 @@ class _NavDrawerState extends State<NavDrawer> {
         children: [
           DrawerHeader(
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [Colors.green, Colors.green],
-              ),
+                color: Colors.green[400]
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,

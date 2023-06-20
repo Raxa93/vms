@@ -71,11 +71,12 @@ class _TeacherDashBoardScreenState extends State<TeacherDashBoardScreen> {
                 elevation: 0,
                 flexibleSpace: Container(
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                      colors: [Colors.green, Colors.green],
-                    ),
+                      color: Colors.green[400]
+                    // gradient: LinearGradient(
+                    //   begin: Alignment.topLeft,
+                    //   end: Alignment.bottomRight,
+                    //   colors: [Colors.green, Colors.green],
+                    // ),
                   ),
                 ),
               ),
@@ -89,11 +90,12 @@ class _TeacherDashBoardScreenState extends State<TeacherDashBoardScreen> {
                         bottomLeft: Radius.circular(20.0),
                         bottomRight: Radius.circular(20.0),
                       ),
-                      gradient: LinearGradient(
-                        begin: Alignment.topLeft,
-                        end: Alignment.bottomRight,
-                        colors: [Colors.green, Colors.green],
-                      ),
+                      color: Colors.green[400]
+                      // gradient: LinearGradient(
+                      //   begin: Alignment.topLeft,
+                      //   end: Alignment.bottomRight,
+                      //   colors: [Colors.green, Colors.green],
+                      // ),
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
                     child: Row(
@@ -277,11 +279,7 @@ class RoundedContainer extends StatelessWidget {
         width: MediaQuery.of(context).size.width * 0.4,
         height: MediaQuery.of(context).size.width * 0.4,
         decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Colors.green, Colors.green],
-          ),
+            color: Colors.green[400],
           borderRadius: BorderRadius.circular(20.0),
           boxShadow: [
             BoxShadow(
