@@ -27,11 +27,11 @@ class _StudentDrawer extends State<StudentDrawer> {
         padding: EdgeInsets.zero,
         children: [
           UserAccountsDrawerHeader(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Colors.green.shade700, Colors.green.shade400],
+                colors: [Colors.green, Colors.green],
               ),
             ),
             accountName:  Text(

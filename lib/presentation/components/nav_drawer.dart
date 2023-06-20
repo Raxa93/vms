@@ -30,7 +30,7 @@ class _NavDrawerState extends State<NavDrawer> {
               gradient: LinearGradient(
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
-                colors: [Colors.green.shade700, Colors.green.shade400],
+                colors: [Colors.green, Colors.green],
               ),
             ),
             child: Column(

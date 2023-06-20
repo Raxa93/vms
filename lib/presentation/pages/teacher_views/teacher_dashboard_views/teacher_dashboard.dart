@@ -74,7 +74,7 @@ class _TeacherDashBoardScreenState extends State<TeacherDashBoardScreen> {
                     gradient: LinearGradient(
                       begin: Alignment.topLeft,
                       end: Alignment.bottomRight,
-                      colors: [Colors.green.shade700, Colors.green.shade400],
+                      colors: [Colors.green, Colors.green],
                     ),
                   ),
                 ),
@@ -92,7 +92,7 @@ class _TeacherDashBoardScreenState extends State<TeacherDashBoardScreen> {
                       gradient: LinearGradient(
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
-                        colors: [Colors.green.shade700, Colors.green.shade400],
+                        colors: [Colors.green, Colors.green],
                       ),
                     ),
                     padding: const EdgeInsets.symmetric(vertical: 30.0, horizontal: 20.0),
@@ -280,7 +280,7 @@ class RoundedContainer extends StatelessWidget {
           gradient: LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Colors.green.shade400, Colors.green.shade300],
+            colors: [Colors.green, Colors.green],
           ),
           borderRadius: BorderRadius.circular(20.0),
           boxShadow: [
