@@ -110,6 +110,14 @@ class _MeetingHistoryScreen extends State<MeetingHistoryScreen> {
                           ),
                         ),
                         const SizedBox(height: 8.0),
+                        Text(
+                          'Teacher Feed-Back : ${meetingData['feedBack'] ?? 'Not Required'}',
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: Colors.grey[600],
+                          ),
+                        ),
+                        const SizedBox(height: 8.0),
                       ],
                     ),
                     onTap: () {
