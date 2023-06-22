@@ -180,6 +180,8 @@ class _NewMeetingView extends State<NewMeetingView> {
                                    endTime: vm.toTimeController.text,
                                    startTime: vm.fromTimeController.text,
                                    studentFcm: widget.studentModel.token,
+                                   date: vm.fromDateController.text
+
                                  );
                                });
 
@@ -219,7 +221,7 @@ class _NewMeetingView extends State<NewMeetingView> {
     return Future.value(false);
   }
 
-  void sendNotifications({required String studentFcm, required  String teacherName,required String venue ,required  String startTime, required String endTime}) async {
+  void sendNotifications({required String date,required String studentFcm, required  String teacherName,required String venue ,required  String startTime, required String endTime}) async {
     const String serverKey = 'AAAApmPcZ3g:APA91bHpDR5ojrP6bUA3v1Pnp4sfSWhNfxrUnjdlRALpRu-yb6vREOJhnh06m6MK1zrdEc8sQfC4NwcxSg5_i_i94aGV55LxrHRjE27RK_BEk4dpPB8RDFYAGCMiwlx1vqR3s1F-bbQa';
 
     const String url = 'https://fcm.googleapis.com/fcm/send';
@@ -231,7 +233,7 @@ class _NewMeetingView extends State<NewMeetingView> {
 
     Map<String, dynamic> notification = {
       'title': 'Meeting Created',
-      'body': 'Dear Student, $teacherName has created meeting with you at $venue from $startTime to $endTime',
+      'body': 'Dear Student, $teacherName has created meeting with you at $venue from $startTime to $endTime on $date',
     };
 
     Map<String, dynamic> requestBody = {

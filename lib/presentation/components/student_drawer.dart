@@ -71,37 +71,37 @@ class _StudentDrawer extends State<StudentDrawer> {
               );
             },
           ),
-          ListTile(
-            leading: const Icon(Icons.exit_to_app),
-            title: const Text('Exit'),
-            onTap: () {
-              showDialog<bool>(
-                context: context,
-                builder: (c) => AlertDialog(
-                  title: const Text('Exit App'),
-                  content: const Text('Do you really want to exit?'),
-                  actions: [
-                    ElevatedButton(
-                      child: const Text('Yes'),
-                      onPressed: () {
-                        if (Platform.isAndroid) {
-                          SystemChannels.platform
-                              .invokeMethod<void>('SystemNavigator.pop');
-                        }
-                        // SystemNavigator.pop();
-                      },
-                    ),
-                    ElevatedButton(
-                      child: const Text('No'),
-                      onPressed: () {
-                        Navigator.pop(c, false);
-                      },
-                    ),
-                  ],
-                ),
-              );
-            },
-          ),
+          // ListTile(
+          //   leading: const Icon(Icons.exit_to_app),
+          //   title: const Text('Exit'),
+          //   onTap: () {
+          //     showDialog<bool>(
+          //       context: context,
+          //       builder: (c) => AlertDialog(
+          //         title: const Text('Exit App'),
+          //         content: const Text('Do you really want to exit?'),
+          //         actions: [
+          //           ElevatedButton(
+          //             child: const Text('Yes'),
+          //             onPressed: () {
+          //               if (Platform.isAndroid) {
+          //                 SystemChannels.platform
+          //                     .invokeMethod<void>('SystemNavigator.pop');
+          //               }
+          //               // SystemNavigator.pop();
+          //             },
+          //           ),
+          //           ElevatedButton(
+          //             child: const Text('No'),
+          //             onPressed: () {
+          //               Navigator.pop(c, false);
+          //             },
+          //           ),
+          //         ],
+          //       ),
+          //     );
+          //   },
+          // ),
         ],
       ),
     );

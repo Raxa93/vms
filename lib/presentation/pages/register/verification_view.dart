@@ -2,6 +2,7 @@
 
 import 'dart:async';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fu_vms/presentation/pages/register/register_vm.dart';
 
@@ -10,6 +11,7 @@ import '../../configurations/size_config.dart';
 import '../../constants/app_styles.dart';
 import '../brewery/brewery_main.dart';
 import '../login/login_view.dart';
+import '../students_view/student_data_entry/student_data_entry_view.dart';
 
 class VerificationView extends StatefulWidget {
   static const routeName = 'verification_screen';
@@ -53,7 +55,7 @@ class _VerificationViewState extends State<VerificationView> {
         debugPrint('Email is verified $value');
         timer.cancel();
         _vm.onModelDestroy();
-        Navigator.of(context).pushReplacementNamed(BreweryMainView.routeName);
+        Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context) => const StudentDataEntryView()));
 
       } else {
         debugPrint('No verified $value');
